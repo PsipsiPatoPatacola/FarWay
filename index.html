@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -21,7 +20,37 @@ body {
   transition: background 0.7s;
 }
 
+/* Snoopy espalhados pelo fundo */
+#snoopy {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#snoopy img {
+  position: absolute;
+  width: clamp(75px, 22vw, 145px);
+  height: 125px;
+  object-fit: contain;
+  opacity: 0.65;
+  animation: subir linear infinite;
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(110vh) rotate(-5deg);
+  }
+  to {
+    transform: translateY(-160px) rotate(5deg);
+  }
+}
+
+/* Conteúdo fica na frente dos Snoopy */
 #app {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 900px;
   min-height: 100vh;
@@ -77,26 +106,6 @@ button:hover {
   resize: vertical;
 }
 
-#snoopy {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 8px;
-  width: 100%;
-  margin: 15px 0;
-}
-
-#snoopy img {
-  width: 100%;
-  height: 130px;
-  object-fit: contain;
-  animation: flutuar 3s ease-in-out infinite;
-}
-
-@keyframes flutuar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-
 .vermelho {
   background: #8b101e;
 }
@@ -105,14 +114,16 @@ button:hover {
   font-size: 14px;
   opacity: 0.8;
 }
-
 </style>
 </head>
 
 <body>
+
+<!-- Fundo animado dos Snoopy -->
+<div id="snoopy"></div>
+
 <div id="app">
   <h1 id="pergunta">Oi, vc ainda me ama?</h1>
-  <div id="snoopy"></div>
   <p id="mensagem"></p>
   <div id="opcoes"></div>
 
@@ -174,13 +185,37 @@ function botao(texto, acao) {
   opcoes.appendChild(b);
 }
 
+/* Coloca os Snoopy em posições variadas, com movimento */
 function imagens(nomes) {
   snoopy.innerHTML = "";
 
-  nomes.forEach(nome => {
+  nomes.forEach((nome, i) => {
     const img = document.createElement("img");
     img.src = nome;
     img.alt = "Snoopy";
+
+    const posicoes = [
+      { left: "3%", top: "8%" },
+      { left: "78%", top: "15%" },
+      { left: "12%", top: "58%" },
+      { left: "84%", top: "66%" },
+      { left: "45%", top: "5%" },
+      { left: "65%", top: "42%" },
+      { left: "2%", top: "35%" },
+      { left: "72%", top: "82%" },
+      { left: "30%", top: "75%" },
+      { left: "52%", top: "90%" },
+      { left: "88%", top: "38%" },
+      { left: "20%", top: "22%" }
+    ];
+
+    const pos = posicoes[i % posicoes.length];
+
+    img.style.left = pos.left;
+    img.style.top = pos.top;
+    img.style.animationDuration = `${16 + (i % 5) * 3}s`;
+    img.style.animationDelay = `${-i * 2}s`;
+
     snoopy.appendChild(img);
   });
 }
@@ -324,5 +359,6 @@ function etapaFinal() {
 
 iniciar();
 </script>
+
 </body>
 </html>
