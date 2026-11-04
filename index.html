@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma pergunta para você ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #190c2c;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background 0.7s;
+  overflow-x: hidden;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  min-height: 100vh;
+  padding: 35px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+h1 {
+  font-size: clamp(28px, 6vw, 48px);
+  margin-bottom: 25px;
+}
+
+button {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 25px;
+  margin: 8px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #9b5cff;
+}
+
+#opcoes {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 420px);
+}
+
+#opcoes button {
+  width: 100%;
+}
+
+#mensagem {
+  font-size: clamp(19px, 4vw, 28px);
+  line-height: 1.6;
+  max-width: 750px;
+  margin: 20px auto;
+}
+
+#campo {
+  width: min(100%, 550px);
+  min-height: 140px;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 17px;
+  resize: vertical;
+}
+
+#snoopy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+#snoopy img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.coracoes {
+  position: fixed;
+  font-size: 25px;
+  animation: subir 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes subir {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-100px); opacity: 0; }
+}
+
+.vermelho {
+  background: #8b101e;
+}
+
+.roxo {
+  background: #190c2c;
+}
+
+#status {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="app">
+  <h1 id="pergunta">Oi, vc ainda me ama?</h1>
+
+  <div id="snoopy"></div>
+
+  <p id="mensagem"></p>
+
+  <div id="opcoes"></div>
+
+  <textarea
+    id="campo"
+    placeholder="Escreva sua resposta..."
+    style="display:none"
+  ></textarea>
+
+  <button id="enviarTexto" style="display:none">
+    Enviar resposta
+  </button>
+
+  <p id="status"></p>
+</div>
+
+<audio id="musica" preload="auto">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
+
+const pergunta = document.getElementById("pergunta");
+const mensagem = document.getElementById("mensagem");
+const opcoes = document.getElementById("opcoes");
+const snoopy = document.getElementById("snoopy");
+const campo = document.getElementById("campo");
+const enviarTexto = document.getElementById("enviarTexto");
+const status = document.getElementById("status");
+const musica = document.getElementById("musica");
+
+function registrar(pergunta, resposta) {
+  if (ENDPOINT.includes("COLE_AQUI")) return;
+
+  fetch(ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      pergunta,
+      resposta,
+      data: new Date().toLocaleString("pt-BR")
+    })
+  }).catch(() => {});
+}
+
+function limpar() {
+  opcoes.innerHTML = "";
+  snoopy.innerHTML = "";
+  mensagem.innerHTML = "";
+  campo.style.display = "none";
+  enviarTexto.style.display = "none";
+  status.textContent = "";
+}
+
+function botao(texto, acao) {
+  const b = document.createElement("button");
+  b.textContent = texto;
+  b.onclick = acao;
+  opcoes.appendChild(b);
+}
+
+function imagens(lista) {
+  snoopy.innerHTML = "";
+
+  lista.forEach(nome => {
+    const img = document.createElement("img");
+    img.src = "imagens/" + nome;
+    img.alt = "Snoopy";
+    snoopy.appendChild(img);
+  });
+}
+
+function iniciar() {
+  document.body.className = "roxo";
+  limpar();
+
+  pergunta.textContent = "Oi, vc ainda me ama?";
+
+  botao("Sim.", () => {
+    registrar(pergunta.textContent, "Sim");
+    etapaSim();
+  });
+
+  botao("Não.", () => {
+    registrar(pergunta.textContent, "Não");
+    limpar();
+    pergunta.textContent = "Entendi. Obrigado por responder.";
+  });
+
+  botao("Talvez.", () => {
+    registrar(pergunta.textContent, "Talvez");
+    etapaTalvez();
+  });
+
+  botao("Amo muito e ainda te quero.", () => {
+    registrar(pergunta.textContent, "Amo muito e ainda te quero");
+    etapaGravidez();
+  });
+}
+
+function etapaSim() {
+  limpar();
+
+  pergunta.textContent = "Eu também te amo ❤️";
+  mensagem.textContent = "Você ainda é muito especial para mim.";
+
+  imagens([
+    "snoopy-coracao.png",
+    "snoopy-coracao2.png",
+    "snoopy-coracao3.png",
+    "snoopy-coracao4.png",
+    "snoopy-coracao5.png"
+  ]);
+
+  botao("Continuar", () => {
+    limpar();
+    pergunta.textContent = "Obrigado por responder ❤️";
+  });
+}
+
+function etapaTalvez() {
+  limpar();
+  document.body.className = "vermelho";
+
+  pergunta.textContent =
+    "Então o que vc quer exatamente e como devo agir?";
+
+  mensagem.textContent =
+    "Pois voltar para CG se necessário, eu realmente irei.";
+
+  campo.style.display = "block";
+  enviarTexto.style.display = "inline-block";
+
+  enviarTexto.onclick = () => {
+    const resposta = campo.value.trim();
+
+    if (!resposta) {
+      status.textContent = "Escreva sua resposta primeiro.";
+      return;
+    }
+
+    registrar(pergunta.textContent, resposta);
+
+    campo.value = "";
+    campo.style.display = "none";
+    enviarTexto.style.display = "none";
+    status.textContent = "Resposta enviada ❤️";
+
+    pergunta.textContent = "Obrigado por me responder.";
+    mensagem.textContent = resposta;
+  };
+}
+
+function etapaGravidez() {
+  limpar();
+  document.body.className = "roxo";
+
+  musica.currentTime = 0;
+  musica.play().catch(() => {
+    status.textContent =
+      "Toque na tela para iniciar a música.";
+  });
+
+  pergunta.textContent = "Vc quer que esteja grávida?";
+
+  botao("Sim, quero muito", () => {
+    registrar(pergunta.textContent, "Sim, quero muito");
+    etapaFinal();
+  });
+
+  botao("Não.", () => {
+    registrar(pergunta.textContent, "Não");
+    limpar();
+    pergunta.textContent = "Obrigado por responder ❤️";
+  });
+}
+
+function etapaFinal() {
+  limpar();
+  document.body.className = "roxo";
+
+  pergunta.textContent = "❤️";
+
+  mensagem.textContent =
+    "Então se cuide direito, coma por duas, beba água por duas, " +
+    "tenha cuidado mental por duas. Estarei indo cuidar de você " +
+    "e cuidar da Diana, errei em muitas coisas, eu sei, mas também " +
+    "sei o quão eu te amo e o quanto quero que você seja a mãe da Diana, " +
+    "pois uma bebezinha com o seu rosto, será tão perfeita quanto você. " +
+    "E vc será a mais mais incrível desse mundo enquanto cuidamos dela " +
+    "desde cedo para irmos pro Canadá. Então, se cuidar pelas duas " +
+    "e me espere que estou indo.";
+
+  imagens([
+    "snoopy-cozinhando.png",
+    "snoopy-louca.png",
+    "snoopy-cama.png",
+    "snoopy-panela.png",
+    "snoopy-panos.png",
+    "snoopy-coracao.png",
+    "snoopy-cozinhando2.png",
+    "snoopy-louca2.png",
+    "snoopy-cama2.png",
+    "snoopy-coracao2.png"
+  ]);
+}
+
+function coracoes() {
+  const c = document.createElement("div");
+  c.className = "coracoes";
+  c.textContent = "❤️";
+  c.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(c);
+
+  setTimeout(() => c.remove(), 5000);
+}
+
+setInterval(coracoes, 800);
+
+iniciar();
+</script>
+
+</body>
+</html>
