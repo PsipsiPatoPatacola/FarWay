@@ -34,7 +34,7 @@ body {
   width: clamp(75px, 22vw, 145px);
   height: 125px;
   object-fit: contain;
-  opacity: 0.65;
+  opacity: 0.75;
   animation: subir linear infinite;
 }
 
@@ -47,7 +47,7 @@ body {
   }
 }
 
-/* Conteúdo fica na frente dos Snoopy */
+/* Pergunta, mensagem e botões ficam na frente */
 #app {
   position: relative;
   z-index: 1;
@@ -185,32 +185,31 @@ function botao(texto, acao) {
   opcoes.appendChild(b);
 }
 
-/* Coloca os Snoopy em posições variadas, com movimento */
+/* Coloca os Snoopy em posições variadas e anima cada um */
 function imagens(nomes) {
   snoopy.innerHTML = "";
+
+  const posicoes = [
+    { left: "2%", top: "5%" },
+    { left: "78%", top: "10%" },
+    { left: "4%", top: "42%" },
+    { left: "82%", top: "48%" },
+    { left: "28%", top: "2%" },
+    { left: "62%", top: "25%" },
+    { left: "12%", top: "72%" },
+    { left: "76%", top: "78%" },
+    { left: "42%", top: "82%" },
+    { left: "55%", top: "60%" },
+    { left: "88%", top: "30%" },
+    { left: "20%", top: "25%" }
+  ];
 
   nomes.forEach((nome, i) => {
     const img = document.createElement("img");
     img.src = nome;
     img.alt = "Snoopy";
 
-    const posicoes = [
-      { left: "3%", top: "8%" },
-      { left: "78%", top: "15%" },
-      { left: "12%", top: "58%" },
-      { left: "84%", top: "66%" },
-      { left: "45%", top: "5%" },
-      { left: "65%", top: "42%" },
-      { left: "2%", top: "35%" },
-      { left: "72%", top: "82%" },
-      { left: "30%", top: "75%" },
-      { left: "52%", top: "90%" },
-      { left: "88%", top: "38%" },
-      { left: "20%", top: "22%" }
-    ];
-
     const pos = posicoes[i % posicoes.length];
-
     img.style.left = pos.left;
     img.style.top = pos.top;
     img.style.animationDuration = `${16 + (i % 5) * 3}s`;
@@ -246,6 +245,22 @@ function iniciar() {
     registrar(pergunta.textContent, "Amo muito e ainda te quero");
     etapaGravidez();
   });
+
+  /* Snoopy aparecem também na tela inicial */
+  imagens([
+    "snoopy-coracao.png",
+    "snoopy-coracao-1.png",
+    "snoopy-coracao-2.png",
+    "snoopy-coracao-3.png",
+    "snoopy-coracao-4.png",
+    "snoopy-cozinhando.png",
+    "snoopy-louca.png",
+    "snoopy-cama.png",
+    "snoopy-coracao.png",
+    "snoopy-coracao-2.png",
+    "snoopy-coracao-4.png",
+    "snoopy-cama.png"
+  ]);
 }
 
 function etapaSim() {
