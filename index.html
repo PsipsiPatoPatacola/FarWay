@@ -185,7 +185,7 @@ function botao(texto, acao) {
   opcoes.appendChild(b);
 }
 
-/* Coloca os Snoopy em posições variadas e anima cada um */
+/* Distribui os Snoopy pelo fundo */
 function imagens(nomes) {
   snoopy.innerHTML = "";
 
@@ -245,22 +245,6 @@ function iniciar() {
     registrar(pergunta.textContent, "Amo muito e ainda te quero");
     etapaGravidez();
   });
-
-  /* Snoopy aparecem também na tela inicial */
-  imagens([
-    "snoopy-coracao.png",
-    "snoopy-coracao-1.png",
-    "snoopy-coracao-2.png",
-    "snoopy-coracao-3.png",
-    "snoopy-coracao-4.png",
-    "snoopy-cozinhando.png",
-    "snoopy-louca.png",
-    "snoopy-cama.png",
-    "snoopy-coracao.png",
-    "snoopy-coracao-2.png",
-    "snoopy-coracao-4.png",
-    "snoopy-cama.png"
-  ]);
 }
 
 function etapaSim() {
@@ -372,7 +356,23 @@ function etapaFinal() {
   ]);
 }
 
+/* Monta a tela inicial e depois coloca os Snoopy nela */
 iniciar();
+
+imagens([
+  "snoopy-coracao.png",
+  "snoopy-coracao-1.png",
+  "snoopy-coracao-2.png",
+  "snoopy-coracao-3.png",
+  "snoopy-coracao-4.png",
+  "snoopy-cozinhando.png",
+  "snoopy-louca.png",
+  "snoopy-cama.png",
+  "snoopy-coracao.png",
+  "snoopy-coracao-2.png",
+  "snoopy-coracao-4.png",
+  "snoopy-cama.png"
+]);
 </script>
 
 </body>
