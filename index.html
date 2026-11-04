@@ -17,71 +17,62 @@ body {
   background: #190c2c;
   color: white;
   font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   transition: background 0.7s;
-  overflow-x: hidden;
 }
 
 #app {
-  position: relative;
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
   min-height: 100vh;
-  padding: 35px 20px;
+  margin: auto;
+  padding: 30px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
 }
 
 h1 {
-  font-size: clamp(28px, 6vw, 48px);
-  margin-bottom: 25px;
-}
-
-button {
-  background: #7c3aed;
-  color: white;
-  border: none;
-  border-radius: 14px;
-  padding: 15px 25px;
-  margin: 8px;
-  font-size: 17px;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-
-button:hover {
-  transform: scale(1.05);
-  background: #9b5cff;
-}
-
-#opcoes {
-  display: flex;
-  flex-direction: column;
-  width: min(100%, 420px);
-}
-
-#opcoes button {
-  width: 100%;
+  font-size: clamp(28px, 6vw, 46px);
+  margin: 15px 0;
 }
 
 #mensagem {
-  font-size: clamp(19px, 4vw, 28px);
+  max-width: 760px;
+  font-size: clamp(18px, 4vw, 25px);
   line-height: 1.6;
-  max-width: 750px;
-  margin: 20px auto;
+  white-space: pre-line;
+}
+
+#opcoes {
+  width: min(100%, 450px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 15px 20px;
+  font-size: 17px;
+  color: white;
+  background: #7838b8;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #9b5de5;
 }
 
 #campo {
   width: min(100%, 550px);
   min-height: 140px;
-  padding: 15px;
+  padding: 14px;
   border-radius: 12px;
+  font: inherit;
   font-size: 17px;
   resize: vertical;
 }
@@ -89,68 +80,45 @@ button:hover {
 #snoopy {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 #snoopy img {
   width: 100%;
-  max-height: 150px;
+  height: 130px;
   object-fit: contain;
   animation: flutuar 3s ease-in-out infinite;
 }
 
 @keyframes flutuar {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.coracoes {
-  position: fixed;
-  font-size: 25px;
-  animation: subir 5s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes subir {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-100px); opacity: 0; }
+  50% { transform: translateY(-7px); }
 }
 
 .vermelho {
   background: #8b101e;
 }
 
-.roxo {
-  background: #190c2c;
-}
-
 #status {
-  font-size: 13px;
-  opacity: 0.7;
-  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0.8;
 }
 
 </style>
 </head>
 
 <body>
-
 <div id="app">
   <h1 id="pergunta">Oi, vc ainda me ama?</h1>
-
   <div id="snoopy"></div>
-
   <p id="mensagem"></p>
-
   <div id="opcoes"></div>
 
-  <textarea
-    id="campo"
+  <textarea id="campo"
     placeholder="Escreva sua resposta..."
-    style="display:none"
-  ></textarea>
+    style="display:none"></textarea>
 
   <button id="enviarTexto" style="display:none">
     Enviar resposta
@@ -159,9 +127,7 @@ button:hover {
   <p id="status"></p>
 </div>
 
-<audio id="musica" preload="auto">
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+<audio id="musica" src="musica.mp3" preload="auto"></audio>
 
 <script>
 const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
@@ -185,8 +151,8 @@ function registrar(pergunta, resposta) {
       "Content-Type": "text/plain;charset=utf-8"
     },
     body: JSON.stringify({
-      pergunta,
-      resposta,
+      pergunta: pergunta,
+      resposta: resposta,
       data: new Date().toLocaleString("pt-BR")
     })
   }).catch(() => {});
@@ -195,7 +161,7 @@ function registrar(pergunta, resposta) {
 function limpar() {
   opcoes.innerHTML = "";
   snoopy.innerHTML = "";
-  mensagem.innerHTML = "";
+  mensagem.textContent = "";
   campo.style.display = "none";
   enviarTexto.style.display = "none";
   status.textContent = "";
@@ -208,19 +174,19 @@ function botao(texto, acao) {
   opcoes.appendChild(b);
 }
 
-function imagens(lista) {
+function imagens(nomes) {
   snoopy.innerHTML = "";
 
-  lista.forEach(nome => {
+  nomes.forEach(nome => {
     const img = document.createElement("img");
-    img.src = "imagens/" + nome;
+    img.src = nome;
     img.alt = "Snoopy";
     snoopy.appendChild(img);
   });
 }
 
 function iniciar() {
-  document.body.className = "roxo";
+  document.body.className = "";
   limpar();
 
   pergunta.textContent = "Oi, vc ainda me ama?";
@@ -255,10 +221,11 @@ function etapaSim() {
 
   imagens([
     "snoopy-coracao.png",
-    "snoopy-coracao2.png",
-    "snoopy-coracao3.png",
-    "snoopy-coracao4.png",
-    "snoopy-coracao5.png"
+    "snoopy-coracao-1.png",
+    "snoopy-coracao-2.png",
+    "snoopy-coracao-3.png",
+    "snoopy-coracao-4.png",
+    "snoopy-coracao.png"
   ]);
 
   botao("Continuar", () => {
@@ -290,24 +257,22 @@ function etapaTalvez() {
 
     registrar(pergunta.textContent, resposta);
 
-    campo.value = "";
     campo.style.display = "none";
     enviarTexto.style.display = "none";
-    status.textContent = "Resposta enviada ❤️";
-
+    opcoes.innerHTML = "";
     pergunta.textContent = "Obrigado por me responder.";
     mensagem.textContent = resposta;
+    status.textContent = "Resposta enviada ❤️";
   };
 }
 
 function etapaGravidez() {
   limpar();
-  document.body.className = "roxo";
+  document.body.className = "";
 
   musica.currentTime = 0;
   musica.play().catch(() => {
-    status.textContent =
-      "Toque na tela para iniciar a música.";
+    status.textContent = "Toque na tela para iniciar a música.";
   });
 
   pergunta.textContent = "Vc quer que esteja grávida?";
@@ -319,6 +284,7 @@ function etapaGravidez() {
 
   botao("Não.", () => {
     registrar(pergunta.textContent, "Não");
+    musica.pause();
     limpar();
     pergunta.textContent = "Obrigado por responder ❤️";
   });
@@ -326,7 +292,7 @@ function etapaGravidez() {
 
 function etapaFinal() {
   limpar();
-  document.body.className = "roxo";
+  document.body.className = "";
 
   pergunta.textContent = "❤️";
 
@@ -334,9 +300,9 @@ function etapaFinal() {
     "Então se cuide direito, coma por duas, beba água por duas, " +
     "tenha cuidado mental por duas. Estarei indo cuidar de você " +
     "e cuidar da Diana, errei em muitas coisas, eu sei, mas também " +
-    "sei o quão eu te amo e o quanto quero que você seja a mãe da Diana, " +
-    "pois uma bebezinha com o seu rosto, será tão perfeita quanto você. " +
-    "E vc será a mais mais incrível desse mundo enquanto cuidamos dela " +
+    "sei o quão te amo e o quanto quero que você seja a mãe da Diana, " +
+    "pois uma bebezinha com o seu rosto será tão perfeita quanto você. " +
+    "E vc será a mais incrível desse mundo enquanto cuidamos dela " +
     "desde cedo para irmos pro Canadá. Então, se cuidar pelas duas " +
     "e me espere que estou indo.";
 
@@ -344,30 +310,19 @@ function etapaFinal() {
     "snoopy-cozinhando.png",
     "snoopy-louca.png",
     "snoopy-cama.png",
-    "snoopy-panela.png",
-    "snoopy-panos.png",
     "snoopy-coracao.png",
-    "snoopy-cozinhando2.png",
-    "snoopy-louca2.png",
-    "snoopy-cama2.png",
-    "snoopy-coracao2.png"
+    "snoopy-coracao-1.png",
+    "snoopy-coracao-2.png",
+    "snoopy-coracao-3.png",
+    "snoopy-coracao-4.png",
+    "snoopy-cozinhando.png",
+    "snoopy-louca.png",
+    "snoopy-cama.png",
+    "snoopy-coracao.png"
   ]);
 }
 
-function coracoes() {
-  const c = document.createElement("div");
-  c.className = "coracoes";
-  c.textContent = "❤️";
-  c.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(c);
-
-  setTimeout(() => c.remove(), 5000);
-}
-
-setInterval(coracoes, 800);
-
 iniciar();
 </script>
-
 </body>
 </html>
