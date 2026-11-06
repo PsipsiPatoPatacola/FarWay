@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,41 +14,23 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: #190c2c;
+  background: #19051f url("fundo-snoopy.png") center center / cover fixed no-repeat;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
-  transition: background 0.7s;
+  transition: background-color 0.7s;
+  position: relative;
 }
 
-/* Snoopy espalhados pelo fundo */
-#snoopy {
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  overflow: hidden;
+  background: rgba(20, 0, 35, 0.24);
   pointer-events: none;
   z-index: 0;
 }
 
-#snoopy img {
-  position: absolute;
-  width: clamp(75px, 22vw, 145px);
-  height: 125px;
-  object-fit: contain;
-  opacity: 0.75;
-  animation: subir linear infinite;
-}
-
-@keyframes subir {
-  from {
-    transform: translateY(110vh) rotate(-5deg);
-  }
-  to {
-    transform: translateY(-160px) rotate(5deg);
-  }
-}
-
-/* Pergunta, mensagem e botões ficam na frente */
 #app {
   position: relative;
   z-index: 1;
@@ -55,7 +38,7 @@ body {
   max-width: 900px;
   min-height: 100vh;
   margin: auto;
-  padding: 30px 16px;
+  padding: 45px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,68 +46,132 @@ body {
 }
 
 h1 {
-  font-size: clamp(28px, 6vw, 46px);
-  margin: 15px 0;
+  width: min(100%, 720px);
+  padding: 22px 18px;
+  margin: 15px 0 55px;
+  font-size: clamp(27px, 6vw, 43px);
+  line-height: 1.3;
+  background: rgba(35, 0, 65, 0.78);
+  border: 2px solid #a52cff;
+  border-radius: 30px;
+  box-shadow: 0 0 18px #9c27ff;
+  text-shadow: 0 0 12px #d66aff;
 }
 
 #mensagem {
-  max-width: 760px;
+  width: min(100%, 760px);
+  padding: 18px;
+  margin: 10px auto 25px;
   font-size: clamp(18px, 4vw, 25px);
   line-height: 1.6;
   white-space: pre-line;
+  background: rgba(22, 0, 38, 0.62);
+  border-radius: 20px;
+  text-shadow: 0 1px 5px #160020;
 }
 
 #opcoes {
-  width: min(100%, 450px);
+  width: min(100%, 620px);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 20px 0;
+  gap: 17px;
+  margin: 0 auto 20px;
 }
 
 button {
-  border: 0;
-  border-radius: 14px;
-  padding: 15px 20px;
-  font-size: 17px;
+  border: 2px solid #c52cff;
+  border-radius: 25px;
+  padding: 17px 20px;
+  min-height: 68px;
+  font-size: clamp(17px, 4vw, 23px);
   color: white;
-  background: #7838b8;
+  background: rgba(65, 10, 105, 0.88);
+  box-shadow: 0 0 12px rgba(190, 35, 255, 0.5);
   cursor: pointer;
+  transition: 0.25s;
 }
 
 button:hover {
-  background: #9b5de5;
+  background: rgba(115, 20, 160, 0.95);
+  box-shadow: 0 0 22px #d52cff;
+  transform: scale(1.02);
 }
 
 #campo {
   width: min(100%, 550px);
   min-height: 140px;
   padding: 14px;
-  border-radius: 12px;
+  border: 2px solid #c52cff;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.95);
+  color: #24102d;
   font: inherit;
   font-size: 17px;
   resize: vertical;
 }
 
+#snoopy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+#snoopy img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-9px) rotate(2deg); }
+}
+
 .vermelho {
-  background: #8b101e;
+  background-color: #650b24;
+}
+
+.vermelho::before {
+  background: rgba(70, 0, 20, 0.65);
 }
 
 #status {
   font-size: 14px;
-  opacity: 0.8;
+  color: white;
+  text-shadow: 0 1px 5px black;
+}
+
+@media (max-width: 600px) {
+  #app {
+    padding: 35px 20px;
+  }
+
+  h1 {
+    margin-bottom: 38px;
+  }
+
+  #opcoes {
+    gap: 14px;
+  }
+
+  button {
+    min-height: 62px;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<!-- Fundo animado dos Snoopy -->
-<div id="snoopy"></div>
-
 <div id="app">
   <h1 id="pergunta">Oi, vc ainda me ama?</h1>
+
+  <div id="snoopy"></div>
+
   <p id="mensagem"></p>
+
   <div id="opcoes"></div>
 
   <textarea id="campo"
@@ -152,7 +199,7 @@ const enviarTexto = document.getElementById("enviarTexto");
 const status = document.getElementById("status");
 const musica = document.getElementById("musica");
 
-function registrar(pergunta, resposta) {
+function registrar(perguntaFeita, resposta) {
   if (ENDPOINT.includes("COLE_AQUI")) return;
 
   fetch(ENDPOINT, {
@@ -162,7 +209,7 @@ function registrar(pergunta, resposta) {
       "Content-Type": "text/plain;charset=utf-8"
     },
     body: JSON.stringify({
-      pergunta: pergunta,
+      pergunta: perguntaFeita,
       resposta: resposta,
       data: new Date().toLocaleString("pt-BR")
     })
@@ -185,36 +232,13 @@ function botao(texto, acao) {
   opcoes.appendChild(b);
 }
 
-/* Distribui os Snoopy pelo fundo */
 function imagens(nomes) {
   snoopy.innerHTML = "";
 
-  const posicoes = [
-    { left: "2%", top: "5%" },
-    { left: "78%", top: "10%" },
-    { left: "4%", top: "42%" },
-    { left: "82%", top: "48%" },
-    { left: "28%", top: "2%" },
-    { left: "62%", top: "25%" },
-    { left: "12%", top: "72%" },
-    { left: "76%", top: "78%" },
-    { left: "42%", top: "82%" },
-    { left: "55%", top: "60%" },
-    { left: "88%", top: "30%" },
-    { left: "20%", top: "25%" }
-  ];
-
-  nomes.forEach((nome, i) => {
+  nomes.forEach(nome => {
     const img = document.createElement("img");
     img.src = nome;
     img.alt = "Snoopy";
-
-    const pos = posicoes[i % posicoes.length];
-    img.style.left = pos.left;
-    img.style.top = pos.top;
-    img.style.animationDuration = `${16 + (i % 5) * 3}s`;
-    img.style.animationDelay = `${-i * 2}s`;
-
     snoopy.appendChild(img);
   });
 }
@@ -225,23 +249,23 @@ function iniciar() {
 
   pergunta.textContent = "Oi, vc ainda me ama?";
 
-  botao("Sim.", () => {
+  botao("♡  Sim.", () => {
     registrar(pergunta.textContent, "Sim");
     etapaSim();
   });
 
-  botao("Não.", () => {
+  botao("♡  Não.", () => {
     registrar(pergunta.textContent, "Não");
     limpar();
     pergunta.textContent = "Entendi. Obrigado por responder.";
   });
 
-  botao("Talvez.", () => {
+  botao("♡  Talvez.", () => {
     registrar(pergunta.textContent, "Talvez");
     etapaTalvez();
   });
 
-  botao("Amo muito e ainda te quero.", () => {
+  botao("♡  Amo muito e ainda te quero.", () => {
     registrar(pergunta.textContent, "Amo muito e ainda te quero");
     etapaGravidez();
   });
@@ -311,12 +335,12 @@ function etapaGravidez() {
 
   pergunta.textContent = "Vc quer que esteja grávida?";
 
-  botao("Sim, quero muito", () => {
+  botao("♡  Sim, quero muito", () => {
     registrar(pergunta.textContent, "Sim, quero muito");
     etapaFinal();
   });
 
-  botao("Não.", () => {
+  botao("♡  Não.", () => {
     registrar(pergunta.textContent, "Não");
     musica.pause();
     limpar();
@@ -339,41 +363,9 @@ function etapaFinal() {
     "E vc será a mais incrível desse mundo enquanto cuidamos dela " +
     "desde cedo para irmos pro Canadá. Então, se cuidar pelas duas " +
     "e me espere que estou indo.";
-
-  imagens([
-    "snoopy-cozinhando.png",
-    "snoopy-louca.png",
-    "snoopy-cama.png",
-    "snoopy-coracao.png",
-    "snoopy-coracao-1.png",
-    "snoopy-coracao-2.png",
-    "snoopy-coracao-3.png",
-    "snoopy-coracao-4.png",
-    "snoopy-cozinhando.png",
-    "snoopy-louca.png",
-    "snoopy-cama.png",
-    "snoopy-coracao.png"
-  ]);
 }
 
-/* Monta a tela inicial e depois coloca os Snoopy nela */
 iniciar();
-
-imagens([
-  "snoopy-coracao.png",
-  "snoopy-coracao-1.png",
-  "snoopy-coracao-2.png",
-  "snoopy-coracao-3.png",
-  "snoopy-coracao-4.png",
-  "snoopy-cozinhando.png",
-  "snoopy-louca.png",
-  "snoopy-cama.png",
-  "snoopy-coracao.png",
-  "snoopy-coracao-2.png",
-  "snoopy-coracao-4.png",
-  "snoopy-cama.png"
-]);
 </script>
-
 </body>
 </html>
