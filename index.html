@@ -20,7 +20,7 @@ body {
   min-height: 100vh;
   background-color: #170522;
   background-image: url("./fundo-snoopy.png?v=3");
-  background-position: center center;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -31,7 +31,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Camada escura para facilitar a leitura */
 body::before {
   content: "";
   position: fixed;
@@ -41,7 +40,6 @@ body::before {
   z-index: 0;
 }
 
-/* Brilhos decorativos */
 body::after {
   content: "♡     ✦      ♥       ✧       ♡       ✦";
   position: fixed;
@@ -66,7 +64,7 @@ body::after {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   min-height: 100vh;
   margin: auto;
   padding: 45px 20px;
@@ -104,7 +102,6 @@ h1 {
   box-shadow: 0 0 15px rgba(164, 35, 255, 0.25);
 }
 
-/* CORREÇÃO: esconde a caixa quando não há mensagem */
 #mensagem:empty {
   display: none;
 }
@@ -188,6 +185,146 @@ button:active {
   }
 }
 
+/* TEMAS DAS GALERIAS */
+
+body.tema-anakin {
+  background: #252525;
+  background-image: none;
+}
+
+body.tema-anakin::before {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+body.tema-anakin::after {
+  color: rgba(220, 220, 220, 0.3);
+  text-shadow: 0 0 12px #777;
+}
+
+body.tema-melissa {
+  background: #310052;
+  background-image: none;
+}
+
+body.tema-cigana {
+  background: #a94308;
+  background-image: none;
+}
+
+body.tema-cigana::before {
+  background: rgba(65, 20, 0, 0.28);
+}
+
+body.tema-cigana::after {
+  color: rgba(255, 190, 90, 0.45);
+  text-shadow: 0 0 12px #ff8c25;
+}
+
+body.tema-familia {
+  background: linear-gradient(135deg, #151515 0%, #29130d 48%, #a9470c 100%);
+  background-attachment: fixed;
+  background-image: none;
+}
+
+body.tema-familia::before {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* GALERIAS DOS BICHINHOS E DA FAMÍLIA */
+
+#app.galeria {
+  max-width: 1200px;
+  justify-content: flex-start;
+  padding-top: 25px;
+}
+
+.galeria h1 {
+  margin: 10px auto 0;
+  width: min(100%, 600px);
+  font-size: clamp(23px, 4vw, 34px);
+}
+
+#app.galeria #mensagem {
+  position: absolute;
+  z-index: 3;
+  width: min(37%, 370px);
+  max-height: 43vh;
+  overflow-y: auto;
+  font-size: clamp(13px, 1.7vw, 17px);
+  line-height: 1.55;
+  padding: 15px;
+  margin: 0;
+  text-align: left;
+  backdrop-filter: blur(7px);
+}
+
+#app.galeria.canto-anakin #mensagem {
+  top: 100px;
+  left: 15px;
+  border-color: #888;
+  background: rgba(15, 15, 15, 0.88);
+}
+
+#app.galeria.canto-melissa #mensagem {
+  bottom: 90px;
+  left: 15px;
+  border-color: #d16aff;
+  background: rgba(35, 0, 55, 0.9);
+}
+
+#app.galeria.canto-cigana #mensagem {
+  top: 100px;
+  right: 15px;
+  border-color: #ffb05b;
+  background: rgba(75, 25, 0, 0.9);
+}
+
+#app.galeria.canto-familia #mensagem {
+  bottom: 90px;
+  right: 15px;
+  border-color: #ff9a45;
+  background: rgba(15, 12, 10, 0.91);
+}
+
+/* Fotos em grade */
+
+#app.galeria #snoopy {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  padding: 0 10px;
+  margin: 165px auto 165px;
+}
+
+#app.galeria #snoopy img {
+  width: 100%;
+  height: 190px;
+  object-fit: contain;
+  border-radius: 16px;
+  padding: 5px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.3);
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+  animation: flutuar 3.5s ease-in-out infinite;
+}
+
+#app.galeria #snoopy img:hover {
+  transform: scale(1.06);
+}
+
+#app.galeria #opcoes {
+  width: min(100%, 350px);
+  margin: 0 auto 25px;
+}
+
+#app.galeria #opcoes button {
+  background: rgba(0,0,0,0.65);
+  border-color: rgba(255,255,255,0.55);
+}
+
+/* TELA VERMELHA */
+
 .vermelho {
   background-color: #650b24;
 }
@@ -202,10 +339,12 @@ button:active {
   text-shadow: 0 1px 5px black;
 }
 
-@media (max-width: 600px) {
+/* CELULAR */
+
+@media (max-width: 650px) {
   body {
     background-attachment: scroll;
-    background-position: center center;
+    background-position: center;
   }
 
   #app {
@@ -222,6 +361,52 @@ button:active {
 
   button {
     min-height: 62px;
+  }
+
+  #app.galeria {
+    padding: 20px 12px;
+  }
+
+  #app.galeria h1 {
+    margin-bottom: 20px;
+  }
+
+  #app.galeria #mensagem {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-height: none;
+    font-size: 15px;
+    margin: 10px 0;
+    order: 0;
+  }
+
+  #app.galeria #snoopy {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 15px auto;
+    padding: 0;
+    order: 1;
+  }
+
+  #app.galeria #snoopy img {
+    height: 190px;
+  }
+
+  #app.galeria #opcoes {
+    order: 2;
+  }
+
+  /* Mensagens que ficam embaixo no computador
+     aparecem depois das fotos no celular. */
+
+  #app.galeria.canto-melissa #mensagem,
+  #app.galeria.canto-familia #mensagem {
+    order: 2;
+  }
+
+  #app.galeria.canto-melissa #snoopy,
+  #app.galeria.canto-familia #snoopy {
+    order: 1;
   }
 }
 </style>
@@ -262,6 +447,7 @@ const campo = document.getElementById("campo");
 const enviarTexto = document.getElementById("enviarTexto");
 const status = document.getElementById("status");
 const musica = document.getElementById("musica");
+const app = document.getElementById("app");
 
 function registrar(perguntaFeita, resposta) {
   if (ENDPOINT.includes("COLE_AQUI")) return;
@@ -281,6 +467,7 @@ function registrar(perguntaFeita, resposta) {
 }
 
 function limpar() {
+  app.className = "";
   opcoes.innerHTML = "";
   snoopy.innerHTML = "";
   mensagem.textContent = "";
@@ -303,20 +490,30 @@ function imagens(nomes) {
   nomes.forEach(nome => {
     const img = document.createElement("img");
     img.src = nome;
-    img.alt = "Snoopy";
+    img.alt = "Foto especial";
+    img.loading = "lazy";
+
+    img.onerror = () => {
+      img.style.display = "none";
+      console.error("Não foi possível carregar: " + nome);
+    };
+
     snoopy.appendChild(img);
   });
 }
 
+/* PRIMEIRA PERGUNTA */
+
 function iniciar() {
-  document.body.className = "";
   limpar();
+  document.body.className = "";
 
-  pergunta.textContent = "Oi, vc ainda me ama?";
+  pergunta.textContent =
+    "Espero que goste independente das escolhas";
 
-  botao("♡  Sim.", () => {
-    registrar(pergunta.textContent, "Sim");
-    etapaSim();
+  botao("♡  Nossos filhos", () => {
+    registrar(pergunta.textContent, "Nossos filhos");
+    etapaFilhos();
   });
 
   botao("♡  Não.", () => {
@@ -336,27 +533,141 @@ function iniciar() {
   });
 }
 
-function etapaSim() {
+/* ESCOLHA DOS FILHOS */
+
+function etapaFilhos() {
   limpar();
 
-  pergunta.textContent = "Eu também te amo ❤️";
-  mensagem.textContent =
-    "Você ainda é muito especial para mim.";
+  pergunta.textContent = "Quem vamos encontrar primeiro? ❤️";
 
-  imagens([
-    "snoopy-coracao.png",
-    "snoopy-coracao-1.png",
-    "snoopy-coracao-2.png",
-    "snoopy-coracao-3.png",
-    "snoopy-coracao-4.png",
-    "snoopy-coracao.png"
-  ]);
+  botao("🐈 Anakin", () => {
+    registrar(pergunta.textContent, "Anakin");
+    galeriaAnakin();
+  });
 
-  botao("Continuar", () => {
-    limpar();
-    pergunta.textContent = "Obrigado por responder ❤️";
+  botao("🐶 Melissa", () => {
+    registrar(pergunta.textContent, "Melissa");
+    galeriaMelissa();
+  });
+
+  botao("🐈 Cigana", () => {
+    registrar(pergunta.textContent, "Cigana");
+    galeriaCigana();
+  });
+
+  botao("❤️ Nossa família", () => {
+    registrar(pergunta.textContent, "Nossa família");
+    galeriaFamilia();
   });
 }
+
+/* FUNÇÃO PARA ABRIR UMA GALERIA */
+
+function abrirGaleria(tema, classe, titulo, texto, fotos) {
+  limpar();
+
+  document.body.className = tema;
+  app.className = "galeria " + classe;
+
+  pergunta.textContent = titulo;
+  mensagem.textContent = texto;
+
+  imagens(fotos);
+
+  botao("← Voltar para os nossos filhos", () => {
+    etapaFilhos();
+  });
+}
+
+/* ANAKIN */
+
+function galeriaAnakin() {
+  abrirGaleria(
+    "tema-anakin",
+    "canto-anakin",
+    "Nosso querido Anakin 🖤",
+
+    "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤",
+
+    [
+      "anakin.jpg",
+      "anakin1.jpg",
+      "anakin2.jpg",
+      "anakin3.jpg",
+      "anakin4.jpg",
+      "anakin5.jpg",
+      "anakin6.jpg"
+    ]
+  );
+}
+
+/* MELISSA */
+
+function galeriaMelissa() {
+  abrirGaleria(
+    "tema-melissa",
+    "canto-melissa",
+    "Nossa linda Melissa Mel 💜",
+
+    "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel💜",
+
+    [
+      "melissa.jpg",
+      "melissa2.jpg",
+      "melissa3.jpg",
+      "melissa4.jpg",
+      "melissa5.jpg"
+    ]
+  );
+}
+
+/* CIGANA */
+
+function galeriaCigana() {
+  abrirGaleria(
+    "tema-cigana",
+    "canto-cigana",
+    "Nossa Cigana 🧡",
+
+    "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja que o melhor fato, é vc ser a mãe dela e quis adotar ela cmg mesmo ela sendo mais de idade",
+
+    [
+      "cigana.jpg",
+      "cigana2.jpg",
+      "cigana3.jpg",
+      "cigana4.jpg",
+      "cigana5.jpg",
+      "cigana6.jpg"
+    ]
+  );
+}
+
+/* FAMÍLIA */
+
+function galeriaFamilia() {
+  abrirGaleria(
+    "tema-familia",
+    "canto-familia",
+    "Nosso pequeno universo ❤️",
+
+    "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta",
+
+    [
+      "nos.jpg",
+      "nos2.jpg",
+      "nos3.jpg",
+      "nos4.jpg",
+      "nos5.jpg",
+      "nos6.jpg",
+      "nos7.jpg",
+      "nos8.jpg",
+      "nos9.jpg",
+      "nos10.jpg"
+    ]
+  );
+}
+
+/* CAMINHO TALVEZ */
 
 function etapaTalvez() {
   limpar();
@@ -391,6 +702,8 @@ function etapaTalvez() {
   };
 }
 
+/* CAMINHO GRAVIDEZ */
+
 function etapaGravidez() {
   limpar();
   document.body.className = "";
@@ -415,6 +728,8 @@ function etapaGravidez() {
     pergunta.textContent = "Obrigado por responder ❤️";
   });
 }
+
+/* ETAPA FINAL */
 
 function etapaFinal() {
   limpar();
