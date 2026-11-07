@@ -11,14 +11,18 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  margin: 0;
   min-height: 100%;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
   background: #170522;
+  background-image: url("./fundo-snoopy.png?v=3");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -26,151 +30,77 @@ body {
   transition: background 0.7s;
 }
 
-/* FUNDO COM AS FOTOS */
-#fundoFotos {
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
+  background: rgba(15, 0, 25, 0.22);
+  pointer-events: none;
   z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
 }
 
-#fundoFotos img {
-  position: absolute;
-  width: min(42vw, 340px);
-  height: 25vh;
-  object-fit: cover;
-  border-radius: 22px;
-  opacity: 0.76;
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.24));
-  border: 2px solid rgba(255,255,255,0.25);
-}
-
-/* Posições das fotos no fundo */
-#fundoFotos img:nth-child(1) {
-  top: 5%;
-  left: -5%;
-  transform: rotate(-8deg);
-}
-
-#fundoFotos img:nth-child(2) {
-  top: 13%;
-  right: -5%;
-  transform: rotate(7deg);
-}
-
-#fundoFotos img:nth-child(3) {
-  top: 37%;
-  left: -7%;
-  transform: rotate(6deg);
-}
-
-#fundoFotos img:nth-child(4) {
-  top: 43%;
-  right: -7%;
-  transform: rotate(-7deg);
-}
-
-#fundoFotos img:nth-child(5) {
-  top: 70%;
-  left: -3%;
-  transform: rotate(-6deg);
-}
-
-#fundoFotos img:nth-child(6) {
-  top: 75%;
-  right: -3%;
-  transform: rotate(8deg);
-}
-
-#fundoFotos img:nth-child(7) {
-  top: 88%;
-  left: 30%;
-  transform: rotate(-4deg);
-}
-
-#fundoFotos img:nth-child(8) {
-  top: 28%;
-  left: 35%;
-  transform: rotate(5deg);
-}
-
-#fundoFotos img:nth-child(9) {
-  top: 58%;
-  left: 35%;
-  transform: rotate(-5deg);
-}
-
-#fundoFotos img:nth-child(10) {
-  top: 92%;
-  right: 20%;
-  transform: rotate(5deg);
-}
-
-/* Escurece levemente as fotos para o texto aparecer */
-#sombraFundo {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  background: rgba(0,0,0,0.40);
-  pointer-events: none;
-}
-
-/* CONTEÚDO */
 #app {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   min-height: 100vh;
   margin: auto;
-  padding: 45px 20px 70px;
+  padding: 45px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 h1 {
+  position: relative;
+  z-index: 3;
   width: min(100%, 720px);
   padding: 20px 16px;
-  margin: 15px 0 55px;
+  margin: 15px 0 40px;
   font-size: clamp(27px, 6vw, 43px);
   line-height: 1.3;
-  background: rgba(31,0,53,0.78);
+  background: rgba(25, 0, 40, 0.72);
   border: 2px solid #a52cff;
   border-radius: 30px;
   box-shadow: 0 0 18px #9c27ff;
   text-shadow: 0 0 12px #d66aff;
 }
 
-/* MENSAGEM SEM CAIXA */
 #mensagem {
-  width: min(100%, 760px);
-  padding: 12px 10px;
-  margin: 35px auto 35px;
-  font-family: "Segoe Script", "Brush Script MT", cursive;
-  font-size: clamp(21px, 5vw, 30px);
+  position: relative;
+  z-index: 3;
+  width: min(92%, 780px);
+  padding: 12px;
+  margin: 25px auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(19px, 4.5vw, 26px);
   line-height: 1.65;
+  color: white;
+  text-align: center;
   white-space: pre-line;
-  color: #fff4ff;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   text-shadow:
     0 2px 5px #000,
-    0 0 10px #000,
-    0 0 18px rgba(190,80,255,0.85);
+    0 0 12px rgba(0,0,0,0.95);
 }
 
 #mensagem:empty {
   display: none;
 }
 
-/* BOTÕES */
 #opcoes {
+  position: relative;
+  z-index: 4;
   width: min(100%, 620px);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 0 auto 25px;
+  margin: 0 auto 20px;
 }
 
 button {
@@ -180,23 +110,20 @@ button {
   min-height: 66px;
   font-size: clamp(17px, 4vw, 23px);
   color: white;
-  background: rgba(55,5,91,0.91);
-  box-shadow: 0 0 12px rgba(190,35,255,0.65);
+  background: rgba(55, 5, 91, 0.91);
+  box-shadow: 0 0 12px rgba(190, 35, 255, 0.65);
   cursor: pointer;
   transition: 0.25s;
 }
 
 button:hover {
-  background: rgba(105,15,150,0.96);
-  box-shadow: 0 0 22px #d52cff;
   transform: scale(1.02);
-}
-
-button:active {
-  transform: scale(0.98);
+  box-shadow: 0 0 22px #d52cff;
 }
 
 #campo {
+  position: relative;
+  z-index: 4;
   width: min(100%, 550px);
   min-height: 140px;
   padding: 14px;
@@ -211,60 +138,168 @@ button:active {
 }
 
 #enviarTexto {
-  display: none;
+  position: relative;
+  z-index: 4;
 }
 
 #status {
+  position: relative;
+  z-index: 4;
   font-size: 15px;
   color: white;
   text-shadow: 0 1px 5px black;
 }
 
-/* CORES DE CADA PARTE */
+/* Fotos espalhadas pelo fundo */
+#fundoFotos {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+#fundoFotos.ativo {
+  display: block;
+}
+
+.foto-fundo {
+  position: absolute;
+  width: clamp(155px, 34vw, 330px);
+  height: clamp(125px, 27vw, 245px);
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2px solid rgba(255,255,255,0.35);
+  opacity: 0.76;
+  box-shadow: 0 0 25px rgba(255,255,255,0.18);
+  animation: flutuar 5s ease-in-out infinite;
+}
+
+.foto-fundo:nth-child(even) {
+  animation-delay: 1.3s;
+}
+
+@keyframes flutuar {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-13px) rotate(3deg);
+  }
+}
+
+/* Posicionamento das fotos */
+.foto-fundo:nth-child(1) {
+  top: 4%;
+  left: 2%;
+  transform: rotate(-5deg);
+}
+
+.foto-fundo:nth-child(2) {
+  top: 5%;
+  right: 2%;
+  transform: rotate(5deg);
+}
+
+.foto-fundo:nth-child(3) {
+  top: 34%;
+  left: -5%;
+  transform: rotate(4deg);
+}
+
+.foto-fundo:nth-child(4) {
+  top: 35%;
+  right: -5%;
+  transform: rotate(-4deg);
+}
+
+.foto-fundo:nth-child(5) {
+  bottom: 5%;
+  left: 3%;
+  transform: rotate(-5deg);
+}
+
+.foto-fundo:nth-child(6) {
+  bottom: 4%;
+  right: 3%;
+  transform: rotate(5deg);
+}
+
+.foto-fundo:nth-child(7) {
+  top: 68%;
+  left: 36%;
+  width: clamp(140px, 28vw, 250px);
+  height: clamp(115px, 23vw, 200px);
+}
+
+/* Cores de cada família */
 body.anakin {
   background: #171717;
 }
 
+body.anakin::before {
+  background: rgba(0,0,0,0.30);
+}
+
 body.melissa {
-  background: #260044;
+  background: #27083d;
+}
+
+body.melissa::before {
+  background: rgba(35,0,55,0.28);
 }
 
 body.cigana {
-  background: #6b2b05;
+  background: #542000;
 }
 
-body.familia {
-  background: #21120c;
+body.cigana::before {
+  background: rgba(65,25,0,0.30);
+}
+
+body.nos {
+  background: #171313;
+}
+
+body.nos::before {
+  background: rgba(30,12,0,0.30);
 }
 
 body.vermelho {
   background: #650b24;
 }
 
-body.anakin #sombraFundo {
-  background: rgba(0,0,0,0.38);
+body.vermelho::before {
+  background: rgba(70,0,20,0.66);
 }
 
-body.melissa #sombraFundo {
-  background: rgba(35,0,65,0.35);
+/* Título das páginas dos filhos */
+body.anakin h1 {
+  border-color: #777;
+  box-shadow: 0 0 18px rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.65);
 }
 
-body.cigana #sombraFundo {
-  background: rgba(75,25,0,0.36);
+body.melissa h1 {
+  border-color: #d52cff;
 }
 
-body.familia #sombraFundo {
-  background: rgba(20,10,5,0.40);
+body.cigana h1 {
+  border-color: #ff9a32;
+  box-shadow: 0 0 18px #ff7b00;
+  background: rgba(65,25,0,0.75);
 }
 
-/* BOTÃO DE VOLTAR */
-.voltar {
-  margin-top: 30px;
-  width: min(100%, 620px);
+body.nos h1 {
+  border-color: #ff8a28;
+  box-shadow: 0 0 18px #ff7b00;
+  background: rgba(0,0,0,0.72);
 }
 
-/* SNOOPY DA PARTE ANTIGA */
 #snoopy {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
   gap: 10px;
@@ -281,33 +316,72 @@ body.familia #sombraFundo {
   height: 115px;
   object-fit: contain;
   animation: flutuar 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 7px rgba(194,60,255,0.55));
-}
-
-@keyframes flutuar {
-  0%,100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
+  filter: drop-shadow(0 0 7px rgba(194, 60, 255, 0.55));
 }
 
 @media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+
   #app {
-    padding: 35px 20px 60px;
-  }
-
-  #fundoFotos img {
-    width: 48vw;
-    height: 20vh;
-    opacity: 0.72;
-  }
-
-  #mensagem {
-    font-size: clamp(20px, 5.5vw, 27px);
-    line-height: 1.65;
-    margin-top: 30px;
+    padding: 35px 16px;
   }
 
   h1 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+  }
+
+  .foto-fundo {
+    width: 43vw;
+    height: 155px;
+    border-radius: 17px;
+    opacity: 0.72;
+  }
+
+  .foto-fundo:nth-child(1) {
+    top: 5%;
+    left: 1%;
+  }
+
+  .foto-fundo:nth-child(2) {
+    top: 7%;
+    right: 1%;
+  }
+
+  .foto-fundo:nth-child(3) {
+    top: 37%;
+    left: -12%;
+  }
+
+  .foto-fundo:nth-child(4) {
+    top: 39%;
+    right: -12%;
+  }
+
+  .foto-fundo:nth-child(5) {
+    bottom: 5%;
+    left: 0;
+  }
+
+  .foto-fundo:nth-child(6) {
+    bottom: 5%;
+    right: 0;
+  }
+
+  .foto-fundo:nth-child(7) {
+    top: 70%;
+    left: 35%;
+    width: 35vw;
+    height: 130px;
+  }
+
+  #mensagem {
+    width: 94%;
+    font-size: 20px;
+    line-height: 1.65;
+    padding: 10px 4px;
+    margin: 25px auto;
   }
 }
 </style>
@@ -316,10 +390,8 @@ body.familia #sombraFundo {
 <body>
 
 <div id="fundoFotos"></div>
-<div id="sombraFundo"></div>
 
 <div id="app">
-
   <h1 id="pergunta">Espero que goste independente das escolhas</h1>
 
   <div id="snoopy"></div>
@@ -332,10 +404,11 @@ body.familia #sombraFundo {
     placeholder="Escreva sua resposta..."
     style="display:none"></textarea>
 
-  <button id="enviarTexto">Enviar resposta</button>
+  <button id="enviarTexto" style="display:none">
+    Enviar resposta
+  </button>
 
   <p id="status"></p>
-
 </div>
 
 <audio id="musica" src="musica.mp3" preload="auto"></audio>
@@ -352,6 +425,48 @@ const enviarTexto = document.getElementById("enviarTexto");
 const status = document.getElementById("status");
 const musica = document.getElementById("musica");
 const fundoFotos = document.getElementById("fundoFotos");
+
+const fotos = {
+  anakin: [
+    "anakin.jpg",
+    "anakin1.jpg",
+    "anakin2.jpg",
+    "anakin3.jpg",
+    "anakin4.jpg",
+    "anakin5.jpg",
+    "anakin6.jpg"
+  ],
+
+  cigana: [
+    "cigana.jpg",
+    "cigana2.jpg",
+    "cigana3.jpg",
+    "cigana4.jpg",
+    "cigana5.jpg",
+    "cigana6.jpg"
+  ],
+
+  melissa: [
+    "melissa.jpg",
+    "melissa2.jpg",
+    "melissa3.jpg",
+    "melissa4.jpg",
+    "melissa5.jpg"
+  ],
+
+  nos: [
+    "nos.jpg",
+    "nos2.jpg",
+    "nos3.jpg",
+    "nos4.jpg",
+    "nos5.jpg",
+    "nos6.jpg",
+    "nos7.jpg",
+    "nos8.jpg",
+    "nos9.jpg",
+    "nos10.jpg"
+  ]
+};
 
 function registrar(perguntaFeita, resposta) {
   if (ENDPOINT.includes("COLE_AQUI")) return;
@@ -373,18 +488,18 @@ function registrar(perguntaFeita, resposta) {
 function limpar() {
   opcoes.innerHTML = "";
   snoopy.innerHTML = "";
-  fundoFotos.innerHTML = "";
   mensagem.textContent = "";
   campo.value = "";
   campo.style.display = "none";
   enviarTexto.style.display = "none";
   status.textContent = "";
+  fundoFotos.innerHTML = "";
+  fundoFotos.classList.remove("ativo");
 }
 
-function botao(texto, acao, classe = "") {
+function botao(texto, acao) {
   const b = document.createElement("button");
   b.textContent = texto;
-  if (classe) b.className = classe;
   b.onclick = acao;
   opcoes.appendChild(b);
 }
@@ -400,153 +515,31 @@ function imagensSnoopy(nomes) {
   });
 }
 
-/* COLOCA AS FOTOS REAIS NO FUNDO */
-function fotosDeFundo(nomes) {
+/* Coloca as fotos reais atrás do conteúdo */
+function colocarFotos(lista) {
   fundoFotos.innerHTML = "";
+  fundoFotos.classList.add("ativo");
 
-  nomes.forEach(nome => {
+  lista.forEach((nome, indice) => {
     const img = document.createElement("img");
+    img.className = "foto-fundo";
     img.src = nome;
-    img.alt = "";
+    img.alt = "Foto da nossa família";
+
     img.onerror = () => {
       img.style.display = "none";
     };
+
+    img.style.animationDelay = (indice * 0.35) + "s";
     fundoFotos.appendChild(img);
   });
 }
 
-/* ESCOLHA DOS FILHOS */
-function etapaFilhos() {
-  limpar();
-  document.body.className = "";
-
-  pergunta.textContent = "Nossos filhos ❤️";
-
-  mensagem.textContent =
-    "Escolha quem você quer ver primeiro.";
-
-  botao("🐈‍⬛ Anakin", () => {
-    registrar("Nossos filhos", "Anakin");
-    etapaAnakin();
-  });
-
-  botao("💜 Melissa", () => {
-    registrar("Nossos filhos", "Melissa");
-    etapaMelissa();
-  });
-
-  botao("🧡 Cigana", () => {
-    registrar("Nossos filhos", "Cigana");
-    etapaCigana();
-  });
-
-  botao("❤️ Nossa família", () => {
-    registrar("Nossos filhos", "Nossa família");
-    etapaFamilia();
-  });
-
-  botao("Voltar", iniciar);
-}
-
-/* ANAKIN */
-function etapaAnakin() {
-  limpar();
-  document.body.className = "anakin";
-
-  pergunta.textContent = "Nosso querido Anakin 🖤";
-
-  mensagem.textContent =
-    "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤";
-
-  fotosDeFundo([
-    "anakin.jpg",
-    "anakin1.jpg",
-    "anakin2.jpg",
-    "anakin3.jpg",
-    "anakin4.jpg",
-    "anakin5.jpg",
-    "anakin6.jpg"
-  ]);
-
-  botao("Voltar à escolha dos filhos ❤️", etapaFilhos, "voltar");
-}
-
-/* MELISSA */
-function etapaMelissa() {
-  limpar();
-  document.body.className = "melissa";
-
-  pergunta.textContent = "Nossa linda Melissa 💜";
-
-  mensagem.textContent =
-    "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel 💜";
-
-  fotosDeFundo([
-    "melissa.jpg",
-    "melissa2.jpg",
-    "melissa3.jpg",
-    "melissa4.jpg",
-    "melissa5.jpg"
-  ]);
-
-  botao("Voltar à escolha dos filhos ❤️", etapaFilhos, "voltar");
-}
-
-/* CIGANA */
-function etapaCigana() {
-  limpar();
-  document.body.className = "cigana";
-
-  pergunta.textContent = "Nossa querida Cigana 🧡";
-
-  mensagem.textContent =
-    "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja que o melhor fato, é vc ser a mãe dela e quis adotar ela cmg mesmo ela sendo mais de idade 🧡";
-
-  fotosDeFundo([
-    "cigana.jpg",
-    "cigana2.jpg",
-    "cigana3.jpg",
-    "cigana4.jpg",
-    "cigana5.jpg",
-    "cigana6.jpg"
-  ]);
-
-  botao("Voltar à escolha dos filhos ❤️", etapaFilhos, "voltar");
-}
-
-/* FAMÍLIA */
-function etapaFamilia() {
-  limpar();
-  document.body.className = "familia";
-
-  pergunta.textContent = "Nossa família ❤️";
-
-  mensagem.textContent =
-    "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta ❤️";
-
-  fotosDeFundo([
-    "nos.jpg",
-    "nos2.jpg",
-    "nos3.jpg",
-    "nos4.jpg",
-    "nos5.jpg",
-    "nos6.jpg",
-    "nos7.jpg",
-    "nos8.jpg",
-    "nos9.jpg",
-    "nos10.jpg"
-  ]);
-
-  botao("Voltar à escolha dos filhos ❤️", etapaFilhos, "voltar");
-}
-
-/* TELA INICIAL */
 function iniciar() {
-  limpar();
   document.body.className = "";
+  limpar();
 
-  pergunta.textContent =
-    "Espero que goste independente das escolhas";
+  pergunta.textContent = "Espero que goste independente das escolhas";
 
   botao("♡  Nossos filhos", () => {
     registrar(pergunta.textContent, "Nossos filhos");
@@ -570,7 +563,92 @@ function iniciar() {
   });
 }
 
-/* TALVEZ */
+function etapaFilhos() {
+  limpar();
+  document.body.className = "";
+
+  pergunta.textContent = "Nossos filhos ❤️";
+
+  botao("🖤 Anakin", () => {
+    registrar("Nossos filhos", "Anakin");
+    etapaPet("anakin");
+  });
+
+  botao("💜 Melissa", () => {
+    registrar("Nossos filhos", "Melissa");
+    etapaPet("melissa");
+  });
+
+  botao("🧡 Cigana", () => {
+    registrar("Nossos filhos", "Cigana");
+    etapaPet("cigana");
+  });
+
+  botao("🖤 Nossa família", () => {
+    registrar("Nossos filhos", "Nossa família");
+    etapaPet("nos");
+  });
+}
+
+function etapaPet(tipo) {
+  limpar();
+
+  document.body.className = tipo;
+  colocarFotos(fotos[tipo]);
+
+  if (tipo === "anakin") {
+    pergunta.textContent = "Nosso querido Anakin 🖤";
+
+    mensagem.textContent =
+      "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤";
+  }
+
+  if (tipo === "melissa") {
+    pergunta.textContent = "Nossa linda Melissa Mel 💜";
+
+    mensagem.textContent =
+      "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel 💜";
+  }
+
+  if (tipo === "cigana") {
+    pergunta.textContent = "Nossa querida Cigana 🧡";
+
+    mensagem.textContent =
+      "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja que o melhor fato, é vc ser a mãe dela e quis adotar ela cmg mesmo ela sendo mais de idade";
+  }
+
+  if (tipo === "nos") {
+    pergunta.textContent = "Nossa família 🖤🧡";
+
+    mensagem.textContent =
+      "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta";
+  }
+
+  botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
+}
+
+function etapaSim() {
+  limpar();
+
+  pergunta.textContent = "Eu também te amo ❤️";
+  mensagem.textContent =
+    "Você ainda é muito especial para mim.";
+
+  imagensSnoopy([
+    "snoopy-coracao.png",
+    "snoopy-coracao-1.png",
+    "snoopy-coracao-2.png",
+    "snoopy-coracao-3.png",
+    "snoopy-coracao-4.png",
+    "snoopy-coracao.png"
+  ]);
+
+  botao("Continuar", () => {
+    limpar();
+    pergunta.textContent = "Obrigado por responder ❤️";
+  });
+}
+
 function etapaTalvez() {
   limpar();
   document.body.className = "vermelho";
@@ -604,14 +682,14 @@ function etapaTalvez() {
   };
 }
 
-/* GRAVIDEZ */
 function etapaGravidez() {
   limpar();
   document.body.className = "";
 
   musica.currentTime = 0;
   musica.play().catch(() => {
-    status.textContent = "Toque na tela para iniciar a música.";
+    status.textContent =
+      "Toque na tela para iniciar a música.";
   });
 
   pergunta.textContent = "Vc quer que esteja grávida?";
@@ -629,7 +707,6 @@ function etapaGravidez() {
   });
 }
 
-/* FINAL DA PARTE DA DIANA */
 function etapaFinal() {
   limpar();
   document.body.className = "";
