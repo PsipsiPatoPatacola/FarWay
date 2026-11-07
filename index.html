@@ -7,9 +7,7 @@
 <title>Uma pergunta para você ❤️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -18,11 +16,7 @@ html, body {
 
 body {
   min-height: 100vh;
-  background: #170522;
-  background-image: url("./fundo-snoopy.png?v=3");
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background: #170522 url("./fundo-snoopy.png?v=3") center/cover fixed;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
@@ -34,7 +28,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(15, 0, 25, 0.22);
+  background: rgba(15,0,25,0.22);
   pointer-events: none;
   z-index: 0;
 }
@@ -56,12 +50,12 @@ body::before {
 h1 {
   position: relative;
   z-index: 3;
-  width: min(100%, 720px);
+  width: min(100%,720px);
   padding: 20px 16px;
   margin: 15px 0 40px;
-  font-size: clamp(27px, 6vw, 43px);
+  font-size: clamp(27px,6vw,43px);
   line-height: 1.3;
-  background: rgba(25, 0, 40, 0.72);
+  background: rgba(25,0,40,0.72);
   border: 2px solid #a52cff;
   border-radius: 30px;
   box-shadow: 0 0 18px #9c27ff;
@@ -71,32 +65,27 @@ h1 {
 #mensagem {
   position: relative;
   z-index: 3;
-  width: min(92%, 780px);
+  width: min(92%,780px);
   padding: 12px;
   margin: 25px auto;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(19px, 4.5vw, 26px);
+  font-size: clamp(19px,4.5vw,26px);
   line-height: 1.65;
   color: white;
   text-align: center;
   white-space: pre-line;
   background: transparent;
   border: none;
-  border-radius: 0;
   box-shadow: none;
-  text-shadow:
-    0 2px 5px #000,
-    0 0 12px rgba(0,0,0,0.95);
+  text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,0.95);
 }
 
-#mensagem:empty {
-  display: none;
-}
+#mensagem:empty { display: none; }
 
 #opcoes {
   position: relative;
   z-index: 4;
-  width: min(100%, 620px);
+  width: min(100%,620px);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -108,10 +97,10 @@ button {
   border-radius: 25px;
   padding: 16px 18px;
   min-height: 66px;
-  font-size: clamp(17px, 4vw, 23px);
+  font-size: clamp(17px,4vw,23px);
   color: white;
-  background: rgba(55, 5, 91, 0.91);
-  box-shadow: 0 0 12px rgba(190, 35, 255, 0.65);
+  background: rgba(55,5,91,0.91);
+  box-shadow: 0 0 12px rgba(190,35,255,0.65);
   cursor: pointer;
   transition: 0.25s;
 }
@@ -124,7 +113,7 @@ button:hover {
 #campo {
   position: relative;
   z-index: 4;
-  width: min(100%, 550px);
+  width: min(100%,550px);
   min-height: 140px;
   padding: 14px;
   border: 2px solid #c52cff;
@@ -137,20 +126,18 @@ button:hover {
   margin-bottom: 15px;
 }
 
-#enviarTexto {
+#enviarTexto, #status {
   position: relative;
   z-index: 4;
 }
 
 #status {
-  position: relative;
-  z-index: 4;
   font-size: 15px;
   color: white;
   text-shadow: 0 1px 5px black;
 }
 
-/* Fotos espalhadas pelo fundo */
+/* Fotos espalhadas atrás das mensagens */
 #fundoFotos {
   position: fixed;
   inset: 0;
@@ -160,14 +147,12 @@ button:hover {
   display: none;
 }
 
-#fundoFotos.ativo {
-  display: block;
-}
+#fundoFotos.ativo { display: block; }
 
 .foto-fundo {
   position: absolute;
-  width: clamp(155px, 34vw, 330px);
-  height: clamp(125px, 27vw, 245px);
+  width: clamp(155px,34vw,330px);
+  height: clamp(125px,27vw,245px);
   object-fit: cover;
   border-radius: 20px;
   border: 2px solid rgba(255,255,255,0.35);
@@ -176,114 +161,47 @@ button:hover {
   animation: flutuar 5s ease-in-out infinite;
 }
 
-.foto-fundo:nth-child(even) {
-  animation-delay: 1.3s;
-}
-
 @keyframes flutuar {
-  0%, 100% {
-    transform: translateY(0) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-13px) rotate(3deg);
-  }
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-13px) rotate(3deg); }
 }
 
-/* Posicionamento das fotos */
-.foto-fundo:nth-child(1) {
-  top: 4%;
-  left: 2%;
-  transform: rotate(-5deg);
-}
-
-.foto-fundo:nth-child(2) {
-  top: 5%;
-  right: 2%;
-  transform: rotate(5deg);
-}
-
-.foto-fundo:nth-child(3) {
-  top: 34%;
-  left: -5%;
-  transform: rotate(4deg);
-}
-
-.foto-fundo:nth-child(4) {
-  top: 35%;
-  right: -5%;
-  transform: rotate(-4deg);
-}
-
-.foto-fundo:nth-child(5) {
-  bottom: 5%;
-  left: 3%;
-  transform: rotate(-5deg);
-}
-
-.foto-fundo:nth-child(6) {
-  bottom: 4%;
-  right: 3%;
-  transform: rotate(5deg);
-}
-
+.foto-fundo:nth-child(1) { top: 4%; left: 2%; }
+.foto-fundo:nth-child(2) { top: 5%; right: 2%; }
+.foto-fundo:nth-child(3) { top: 34%; left: -5%; }
+.foto-fundo:nth-child(4) { top: 35%; right: -5%; }
+.foto-fundo:nth-child(5) { bottom: 5%; left: 3%; }
+.foto-fundo:nth-child(6) { bottom: 4%; right: 3%; }
 .foto-fundo:nth-child(7) {
   top: 68%;
   left: 36%;
-  width: clamp(140px, 28vw, 250px);
-  height: clamp(115px, 23vw, 200px);
+  width: clamp(140px,28vw,250px);
+  height: clamp(115px,23vw,200px);
 }
 
-/* Cores de cada família */
-body.anakin {
-  background: #171717;
-}
+/* Cores das seções */
+body.anakin { background: #171717; }
+body.anakin::before { background: rgba(0,0,0,0.30); }
 
-body.anakin::before {
-  background: rgba(0,0,0,0.30);
-}
+body.melissa { background: #27083d; }
+body.melissa::before { background: rgba(35,0,55,0.28); }
 
-body.melissa {
-  background: #27083d;
-}
+body.cigana { background: #542000; }
+body.cigana::before { background: rgba(65,25,0,0.30); }
 
-body.melissa::before {
-  background: rgba(35,0,55,0.28);
-}
+body.nos { background: #171313; }
+body.nos::before { background: rgba(30,12,0,0.30); }
 
-body.cigana {
-  background: #542000;
-}
+body.vermelho { background: #650b24; }
+body.vermelho::before { background: rgba(70,0,20,0.66); }
 
-body.cigana::before {
-  background: rgba(65,25,0,0.30);
-}
-
-body.nos {
-  background: #171313;
-}
-
-body.nos::before {
-  background: rgba(30,12,0,0.30);
-}
-
-body.vermelho {
-  background: #650b24;
-}
-
-body.vermelho::before {
-  background: rgba(70,0,20,0.66);
-}
-
-/* Título das páginas dos filhos */
 body.anakin h1 {
   border-color: #777;
   box-shadow: 0 0 18px rgba(255,255,255,0.2);
   background: rgba(0,0,0,0.65);
 }
 
-body.melissa h1 {
-  border-color: #d52cff;
-}
+body.melissa h1 { border-color: #d52cff; }
 
 body.cigana h1 {
   border-color: #ff9a32;
@@ -301,36 +219,28 @@ body.nos h1 {
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(85px,1fr));
   gap: 10px;
   width: 100%;
   margin: 15px 0;
 }
 
-#snoopy:empty {
-  display: none;
-}
+#snoopy:empty { display: none; }
 
 #snoopy img {
   width: 100%;
   height: 115px;
   object-fit: contain;
   animation: flutuar 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 7px rgba(194, 60, 255, 0.55));
+  filter: drop-shadow(0 0 7px rgba(194,60,255,0.55));
 }
 
-@media (max-width: 600px) {
-  body {
-    background-attachment: scroll;
-  }
+@media (max-width:600px) {
+  body { background-attachment: scroll; }
 
-  #app {
-    padding: 35px 16px;
-  }
+  #app { padding: 35px 16px; }
 
-  h1 {
-    margin-bottom: 30px;
-  }
+  h1 { margin-bottom: 30px; }
 
   .foto-fundo {
     width: 43vw;
@@ -339,36 +249,12 @@ body.nos h1 {
     opacity: 0.72;
   }
 
-  .foto-fundo:nth-child(1) {
-    top: 5%;
-    left: 1%;
-  }
-
-  .foto-fundo:nth-child(2) {
-    top: 7%;
-    right: 1%;
-  }
-
-  .foto-fundo:nth-child(3) {
-    top: 37%;
-    left: -12%;
-  }
-
-  .foto-fundo:nth-child(4) {
-    top: 39%;
-    right: -12%;
-  }
-
-  .foto-fundo:nth-child(5) {
-    bottom: 5%;
-    left: 0;
-  }
-
-  .foto-fundo:nth-child(6) {
-    bottom: 5%;
-    right: 0;
-  }
-
+  .foto-fundo:nth-child(1) { top: 5%; left: 1%; }
+  .foto-fundo:nth-child(2) { top: 7%; right: 1%; }
+  .foto-fundo:nth-child(3) { top: 37%; left: -12%; }
+  .foto-fundo:nth-child(4) { top: 39%; right: -12%; }
+  .foto-fundo:nth-child(5) { bottom: 5%; left: 0; }
+  .foto-fundo:nth-child(6) { bottom: 5%; right: 0; }
   .foto-fundo:nth-child(7) {
     top: 70%;
     left: 35%;
@@ -393,9 +279,7 @@ body.nos h1 {
 
 <div id="app">
   <h1 id="pergunta">Espero que goste independente das escolhas</h1>
-
   <div id="snoopy"></div>
-
   <p id="mensagem"></p>
 
   <div id="opcoes"></div>
@@ -411,7 +295,11 @@ body.nos h1 {
   <p id="status"></p>
 </div>
 
+<!-- Música original da parte antiga -->
 <audio id="musica" src="musica.mp3" preload="auto"></audio>
+
+<!-- Música exclusiva das partes dos filhos -->
+<audio id="musicaFilhos" preload="auto"></audio>
 
 <script>
 const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
@@ -424,6 +312,7 @@ const campo = document.getElementById("campo");
 const enviarTexto = document.getElementById("enviarTexto");
 const status = document.getElementById("status");
 const musica = document.getElementById("musica");
+const musicaFilhos = document.getElementById("musicaFilhos");
 const fundoFotos = document.getElementById("fundoFotos");
 
 const fotos = {
@@ -467,6 +356,34 @@ const fotos = {
     "nos10.jpg"
   ]
 };
+
+/* Associa cada seção à sua música */
+const musicasDosFilhos = {
+  anakin: "musicaanakin.mp3",
+  melissa: "musicamelissa.mp3",
+  cigana: "musicacigana.mp3",
+  nos: "musicanos.mp3"
+};
+
+function pararMusicaFilhos() {
+  musicaFilhos.pause();
+  musicaFilhos.currentTime = 0;
+  musicaFilhos.removeAttribute("src");
+  musicaFilhos.load();
+}
+
+function tocarMusicaFilho(tipo) {
+  musica.pause();
+  pararMusicaFilhos();
+
+  musicaFilhos.src = musicasDosFilhos[tipo];
+  musicaFilhos.load();
+
+  musicaFilhos.play().catch(() => {
+    status.textContent =
+      "Se a música não começar, toque na tela para iniciar.";
+  });
+}
 
 function registrar(perguntaFeita, resposta) {
   if (ENDPOINT.includes("COLE_AQUI")) return;
@@ -515,7 +432,6 @@ function imagensSnoopy(nomes) {
   });
 }
 
-/* Coloca as fotos reais atrás do conteúdo */
 function colocarFotos(lista) {
   fundoFotos.innerHTML = "";
   fundoFotos.classList.add("ativo");
@@ -525,17 +441,15 @@ function colocarFotos(lista) {
     img.className = "foto-fundo";
     img.src = nome;
     img.alt = "Foto da nossa família";
-
-    img.onerror = () => {
-      img.style.display = "none";
-    };
-
+    img.onerror = () => { img.style.display = "none"; };
     img.style.animationDelay = (indice * 0.35) + "s";
     fundoFotos.appendChild(img);
   });
 }
 
 function iniciar() {
+  pararMusicaFilhos();
+  musica.pause();
   document.body.className = "";
   limpar();
 
@@ -547,23 +461,28 @@ function iniciar() {
   });
 
   botao("♡  Não.", () => {
+    pararMusicaFilhos();
     registrar(pergunta.textContent, "Não");
     limpar();
     pergunta.textContent = "Entendi. Obrigado por responder.";
   });
 
   botao("♡  Talvez.", () => {
+    pararMusicaFilhos();
     registrar(pergunta.textContent, "Talvez");
     etapaTalvez();
   });
 
   botao("♡  Amo muito e ainda te quero.", () => {
+    pararMusicaFilhos();
     registrar(pergunta.textContent, "Amo muito e ainda te quero");
     etapaGravidez();
   });
 }
 
 function etapaFilhos() {
+  pararMusicaFilhos();
+  musica.pause();
   limpar();
   document.body.className = "";
 
@@ -592,34 +511,31 @@ function etapaFilhos() {
 
 function etapaPet(tipo) {
   limpar();
-
   document.body.className = tipo;
+
   colocarFotos(fotos[tipo]);
+  tocarMusicaFilho(tipo);
 
   if (tipo === "anakin") {
     pergunta.textContent = "Nosso querido Anakin 🖤";
-
     mensagem.textContent =
       "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤";
   }
 
   if (tipo === "melissa") {
     pergunta.textContent = "Nossa linda Melissa Mel 💜";
-
     mensagem.textContent =
       "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel 💜";
   }
 
   if (tipo === "cigana") {
     pergunta.textContent = "Nossa querida Cigana 🧡";
-
     mensagem.textContent =
       "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja que o melhor fato, é vc ser a mãe dela e quis adotar ela cmg mesmo ela sendo mais de idade";
   }
 
   if (tipo === "nos") {
     pergunta.textContent = "Nossa família 🖤🧡";
-
     mensagem.textContent =
       "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta";
   }
@@ -628,11 +544,11 @@ function etapaPet(tipo) {
 }
 
 function etapaSim() {
+  pararMusicaFilhos();
   limpar();
 
   pergunta.textContent = "Eu também te amo ❤️";
-  mensagem.textContent =
-    "Você ainda é muito especial para mim.";
+  mensagem.textContent = "Você ainda é muito especial para mim.";
 
   imagensSnoopy([
     "snoopy-coracao.png",
@@ -650,6 +566,7 @@ function etapaSim() {
 }
 
 function etapaTalvez() {
+  pararMusicaFilhos();
   limpar();
   document.body.className = "vermelho";
 
@@ -683,13 +600,14 @@ function etapaTalvez() {
 }
 
 function etapaGravidez() {
+  pararMusicaFilhos();
   limpar();
   document.body.className = "";
 
+  musica.pause();
   musica.currentTime = 0;
   musica.play().catch(() => {
-    status.textContent =
-      "Toque na tela para iniciar a música.";
+    status.textContent = "Toque na tela para iniciar a música.";
   });
 
   pergunta.textContent = "Vc quer que esteja grávida?";
@@ -708,6 +626,7 @@ function etapaGravidez() {
 }
 
 function etapaFinal() {
+  pararMusicaFilhos();
   limpar();
   document.body.className = "";
 
