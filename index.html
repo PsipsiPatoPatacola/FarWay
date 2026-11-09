@@ -160,7 +160,7 @@ button:hover {
   50% { transform: translateY(-13px) rotate(3deg); }
 }
 
-/* Fotos dos animais */
+/* Fotos */
 #fundoFotos {
   position: fixed;
   inset: 0;
@@ -197,7 +197,7 @@ button:hover {
   height: clamp(115px,23vw,200px);
 }
 
-/* Cores dos animais */
+/* Temas */
 body.anakin { background: #171717; }
 body.anakin::before { background: rgba(0,0,0,.30); }
 
@@ -250,12 +250,10 @@ body.fim-ciano::before {
   background-color: rgba(15,30,35,.55);
 }
 
-/* Títulos sem caixas na parte cinza e ciano */
 body.fim-ciano h1 {
   color: #e9fcff;
   background: transparent;
   border: none;
-  border-radius: 0;
   box-shadow: none;
   text-shadow: 0 0 13px rgba(130,240,255,.8);
   padding: 10px;
@@ -280,6 +278,55 @@ body.fim-ciano button:hover {
   box-shadow: 0 0 25px #83e5ee;
 }
 
+/* Animação das mãozinhas: efeito de minijogo */
+.maozinha {
+  display: inline-block;
+  margin-right: 9px;
+  font-size: 25px;
+  transform-origin: center;
+  animation: maoJogo 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px #ffe66d);
+}
+
+#opcoes button:nth-child(2) .maozinha {
+  animation-delay: .5s;
+}
+
+@keyframes maoJogo {
+  0%, 100% {
+    transform: translateY(0) rotate(-12deg) scale(1);
+  }
+  25% {
+    transform: translateY(-12px) rotate(8deg) scale(1.18);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-8deg) scale(1.12);
+  }
+}
+
+/* Destaque alternado dos botões */
+body.fim-ciano #opcoes button {
+  animation: botaoJogo 2s ease-in-out infinite;
+}
+
+body.fim-ciano #opcoes button:nth-child(2) {
+  animation-delay: 1s;
+}
+
+@keyframes botaoJogo {
+  0%, 45%, 100% {
+    box-shadow: 0 0 12px rgba(111,225,237,.45);
+    border-color: #83e5ee;
+  }
+  20% {
+    box-shadow: 0 0 25px rgba(111,225,237,.95);
+    border-color: #d2fbff;
+  }
+}
+
 #decoracaoFim {
   display: none;
   position: fixed;
@@ -301,41 +348,12 @@ body.fim-ciano #decoracaoFim { display: block; }
   animation: flutuar 6s ease-in-out infinite;
 }
 
-.snoopy-decor:nth-child(1) {
-  top: 1%;
-  left: -4%;
-  transform: rotate(-12deg);
-}
-
-.snoopy-decor:nth-child(2) {
-  top: 3%;
-  right: -5%;
-  width: clamp(145px,32vw,260px);
-}
-
-.snoopy-decor:nth-child(3) {
-  top: 39%;
-  left: -8%;
-  width: clamp(130px,30vw,245px);
-}
-
-.snoopy-decor:nth-child(4) {
-  top: 43%;
-  right: -8%;
-  width: clamp(130px,30vw,245px);
-}
-
-.snoopy-decor:nth-child(5) {
-  bottom: 1%;
-  left: -4%;
-  width: clamp(135px,30vw,245px);
-}
-
-.snoopy-decor:nth-child(6) {
-  bottom: 0;
-  right: -5%;
-  width: clamp(145px,32vw,260px);
-}
+.snoopy-decor:nth-child(1) { top: 1%; left: -4%; }
+.snoopy-decor:nth-child(2) { top: 3%; right: -5%; width: clamp(145px,32vw,260px); }
+.snoopy-decor:nth-child(3) { top: 39%; left: -8%; width: clamp(130px,30vw,245px); }
+.snoopy-decor:nth-child(4) { top: 43%; right: -8%; width: clamp(130px,30vw,245px); }
+.snoopy-decor:nth-child(5) { bottom: 1%; left: -4%; width: clamp(135px,30vw,245px); }
+.snoopy-decor:nth-child(6) { bottom: 0; right: -5%; width: clamp(145px,32vw,260px); }
 
 #legenda {
   position: relative;
@@ -352,9 +370,7 @@ body.fim-ciano #decoracaoFim { display: block; }
 
 @media (max-width:600px) {
   body { background-attachment: scroll; }
-
   #app { padding: 35px 16px; }
-
   h1 { margin-bottom: 30px; }
 
   .foto-fundo {
@@ -370,7 +386,6 @@ body.fim-ciano #decoracaoFim { display: block; }
   .foto-fundo:nth-child(4) { top: 39%; right: -12%; }
   .foto-fundo:nth-child(5) { bottom: 5%; left: 0; }
   .foto-fundo:nth-child(6) { bottom: 5%; right: 0; }
-
   .foto-fundo:nth-child(7) {
     top: 70%;
     left: 35%;
@@ -489,6 +504,8 @@ function registrar(perguntaFeita, resposta) {
 }
 
 function limpar() {
+  clearInterval(digitacaoAtual);
+
   opcoes.innerHTML = "";
   snoopy.innerHTML = "";
   mensagem.textContent = "";
@@ -499,6 +516,8 @@ function limpar() {
   status.textContent = "";
   fundoFotos.innerHTML = "";
   fundoFotos.classList.remove("ativo");
+
+  pergunta.style.display = "block";
 }
 
 function botao(texto, acao) {
@@ -534,7 +553,6 @@ function colocarFotos(lista) {
   });
 }
 
-/* Efeito de digitação */
 let digitacaoAtual = null;
 
 function digitar(texto, velocidade = 35) {
@@ -554,8 +572,8 @@ function digitar(texto, velocidade = 35) {
 
 function iniciar() {
   pararTodasMusicas();
-  document.body.className = "";
   limpar();
+  document.body.className = "";
 
   pergunta.textContent = "Espero que goste independente das escolhas";
 
@@ -619,7 +637,7 @@ function etapaPet(tipo) {
   const textos = {
     anakin: [
       "Nosso querido Anakin 🖤",
-      "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤"
+      "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho Anakin 🖤"
     ],
     melissa: [
       "Nossa linda Melissa Mel 💜",
@@ -641,23 +659,29 @@ function etapaPet(tipo) {
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* Parte cinza e ciano */
+/* Tela de escolha: sem título e com mãozinhas animadas */
 function etapaNaoAcabou() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
 
-  pergunta.textContent = "O que você deseja?";
+  pergunta.style.display = "none";
 
-  botao("☝️  Realmente acabou?", () => {
+  const botaoUm = document.createElement("button");
+  botaoUm.innerHTML = '<span class="maozinha">☝️</span> Realmente acabou?';
+  botaoUm.onclick = () => {
     registrar("NÃO, Acabou.", "Realmente acabou?");
     etapaRealmenteAcabou();
-  });
+  };
+  opcoes.appendChild(botaoUm);
 
-  botao("☝️  Esse é o fim", () => {
+  const botaoDois = document.createElement("button");
+  botaoDois.innerHTML = '<span class="maozinha">☝️</span> Esse é o fim';
+  botaoDois.onclick = () => {
     registrar("NÃO, Acabou.", "Esse é o fim");
     etapaEsseEFim();
-  });
+  };
+  opcoes.appendChild(botaoDois);
 }
 
 function etapaRealmenteAcabou() {
@@ -674,7 +698,6 @@ function etapaRealmenteAcabou() {
   tocar(musicaIdiota);
 }
 
-/* Legenda sincronizada com o áudio */
 function etapaEsseEFim() {
   pararTodasMusicas();
   limpar();
@@ -725,7 +748,7 @@ function etapaTalvez() {
     "Então o que vc quer exatamente e como devo agir?";
 
   mensagem.textContent =
-    "Pois voltar para CG se necessário, eu realmente irei.";
+    "Pois voltar para CG se necessário, eu realmente irei";
 
   campo.style.display = "block";
   enviarTexto.style.display = "inline-block";
@@ -793,5 +816,6 @@ function etapaFinal() {
 
 iniciar();
 </script>
+
 </body>
 </html>
