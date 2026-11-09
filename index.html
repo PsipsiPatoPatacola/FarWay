@@ -278,36 +278,53 @@ body.fim-ciano button:hover {
   box-shadow: 0 0 25px #83e5ee;
 }
 
-/* Animação das mãozinhas: efeito de minijogo */
-.maozinha {
+/* Mão pixelada estilo videogame */
+.mao-game {
   display: inline-block;
-  margin-right: 9px;
-  font-size: 25px;
-  transform-origin: center;
-  animation: maoJogo 1s ease-in-out infinite;
+  width: 32px;
+  height: 38px;
+  vertical-align: middle;
+  margin-right: 10px;
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
   filter: drop-shadow(0 0 5px #ffe66d);
+  animation: maoGame 1s steps(4, end) infinite;
 }
 
-#opcoes button:nth-child(2) .maozinha {
+.mao-game svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mao-game path {
+  fill: #ffd84a;
+  stroke: #5b3900;
+  stroke-width: 1.5;
+  stroke-linejoin: miter;
+  shape-rendering: crispEdges;
+}
+
+#opcoes button:nth-child(2) .mao-game {
   animation-delay: .5s;
 }
 
-@keyframes maoJogo {
+@keyframes maoGame {
   0%, 100% {
-    transform: translateY(0) rotate(-12deg) scale(1);
+    transform: translateY(0) scale(1);
   }
   25% {
-    transform: translateY(-12px) rotate(8deg) scale(1.18);
+    transform: translateY(-9px) scale(1.12);
   }
   50% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    transform: translateY(0) scale(1);
   }
   75% {
-    transform: translateY(-5px) rotate(-8deg) scale(1.12);
+    transform: translateY(-4px) scale(1.08);
   }
 }
 
-/* Destaque alternado dos botões */
+/* Brilho alternado dos botões */
 body.fim-ciano #opcoes button {
   animation: botaoJogo 2s ease-in-out infinite;
 }
@@ -327,6 +344,7 @@ body.fim-ciano #opcoes button:nth-child(2) {
   }
 }
 
+/* Snoopys decorativos */
 #decoracaoFim {
   display: none;
   position: fixed;
@@ -386,6 +404,7 @@ body.fim-ciano #decoracaoFim { display: block; }
   .foto-fundo:nth-child(4) { top: 39%; right: -12%; }
   .foto-fundo:nth-child(5) { bottom: 5%; left: 0; }
   .foto-fundo:nth-child(6) { bottom: 5%; right: 0; }
+
   .foto-fundo:nth-child(7) {
     top: 70%;
     left: 35%;
@@ -503,6 +522,8 @@ function registrar(perguntaFeita, resposta) {
   }).catch(() => {});
 }
 
+let digitacaoAtual = null;
+
 function limpar() {
   clearInterval(digitacaoAtual);
 
@@ -516,7 +537,6 @@ function limpar() {
   status.textContent = "";
   fundoFotos.innerHTML = "";
   fundoFotos.classList.remove("ativo");
-
   pergunta.style.display = "block";
 }
 
@@ -552,8 +572,6 @@ function colocarFotos(lista) {
     fundoFotos.appendChild(img);
   });
 }
-
-let digitacaoAtual = null;
 
 function digitar(texto, velocidade = 35) {
   clearInterval(digitacaoAtual);
@@ -659,7 +677,21 @@ function etapaPet(tipo) {
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* Tela de escolha: sem título e com mãozinhas animadas */
+/* Tela de escolha com mãos de videogame */
+function criarMaoGame() {
+  return `
+    <span class="mao-game" aria-hidden="true">
+      <svg viewBox="0 0 16 20">
+        <path d="
+          M6 1 H8 V7 H10 V5 H12 V7 H14 V10
+          H15 V15 H13 V17 H11 V19 H5 V17 H3
+          V15 H1 V11 H3 V13 H5 V8 H6 Z
+        "/>
+      </svg>
+    </span>
+  `;
+}
+
 function etapaNaoAcabou() {
   pararTodasMusicas();
   limpar();
@@ -668,7 +700,7 @@ function etapaNaoAcabou() {
   pergunta.style.display = "none";
 
   const botaoUm = document.createElement("button");
-  botaoUm.innerHTML = '<span class="maozinha">☝️</span> Realmente acabou?';
+  botaoUm.innerHTML = criarMaoGame() + "Realmente acabou?";
   botaoUm.onclick = () => {
     registrar("NÃO, Acabou.", "Realmente acabou?");
     etapaRealmenteAcabou();
@@ -676,7 +708,7 @@ function etapaNaoAcabou() {
   opcoes.appendChild(botaoUm);
 
   const botaoDois = document.createElement("button");
-  botaoDois.innerHTML = '<span class="maozinha">☝️</span> Esse é o fim';
+  botaoDois.innerHTML = criarMaoGame() + "Esse é o fim";
   botaoDois.onclick = () => {
     registrar("NÃO, Acabou.", "Esse é o fim");
     etapaEsseEFim();
@@ -703,8 +735,10 @@ function etapaEsseEFim() {
   limpar();
   document.body.className = "fim-ciano";
 
-  pergunta.textContent = "Te levo comigo ❤️";
-  legenda.textContent = " ";
+  /* Não exibe título nessa tela */
+  pergunta.style.display = "none";
+
+  legenda.textContent = "";
 
   tocar(musicaFim);
 
