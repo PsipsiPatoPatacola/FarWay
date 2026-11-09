@@ -16,19 +16,19 @@ html, body {
 
 body {
   min-height: 100vh;
-  background: #170522 url("./fundo-snoopy.png?v=3") center/cover fixed;
+  background: #170522 url("./fundo-snoopy.png") center/cover fixed;
   color: white;
   font-family: Arial, sans-serif;
   text-align: center;
   overflow-x: hidden;
-  transition: background 0.7s;
+  transition: background .7s, color .7s;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(15,0,25,0.22);
+  background: rgba(15,0,25,.22);
   pointer-events: none;
   z-index: 0;
 }
@@ -49,13 +49,13 @@ body::before {
 
 h1 {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   width: min(100%,720px);
   padding: 20px 16px;
   margin: 15px 0 40px;
   font-size: clamp(27px,6vw,43px);
   line-height: 1.3;
-  background: rgba(25,0,40,0.72);
+  background: rgba(25,0,40,.72);
   border: 2px solid #a52cff;
   border-radius: 30px;
   box-shadow: 0 0 18px #9c27ff;
@@ -64,7 +64,7 @@ h1 {
 
 #mensagem {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   width: min(92%,780px);
   padding: 12px;
   margin: 25px auto;
@@ -76,15 +76,14 @@ h1 {
   white-space: pre-line;
   background: transparent;
   border: none;
-  box-shadow: none;
-  text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,0.95);
+  text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,.95);
 }
 
 #mensagem:empty { display: none; }
 
 #opcoes {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   width: min(100%,620px);
   display: flex;
   flex-direction: column;
@@ -99,10 +98,10 @@ button {
   min-height: 66px;
   font-size: clamp(17px,4vw,23px);
   color: white;
-  background: rgba(55,5,91,0.91);
-  box-shadow: 0 0 12px rgba(190,35,255,0.65);
+  background: rgba(55,5,91,.91);
+  box-shadow: 0 0 12px rgba(190,35,255,.65);
   cursor: pointer;
-  transition: 0.25s;
+  transition: .25s;
 }
 
 button:hover {
@@ -112,13 +111,13 @@ button:hover {
 
 #campo {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   width: min(100%,550px);
   min-height: 140px;
   padding: 14px;
   border: 2px solid #c52cff;
   border-radius: 15px;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,.96);
   color: #24102d;
   font: inherit;
   font-size: 17px;
@@ -126,10 +125,7 @@ button:hover {
   margin-bottom: 15px;
 }
 
-#enviarTexto, #status {
-  position: relative;
-  z-index: 4;
-}
+#enviarTexto, #status { position: relative; z-index: 5; }
 
 #status {
   font-size: 15px;
@@ -137,10 +133,9 @@ button:hover {
   text-shadow: 0 1px 5px black;
 }
 
-/* Snoopy das partes anteriores */
 #snoopy {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(85px,1fr));
   gap: 10px;
@@ -155,7 +150,7 @@ button:hover {
   height: 115px;
   object-fit: contain;
   animation: flutuar 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 7px rgba(194,60,255,0.55));
+  filter: drop-shadow(0 0 7px rgba(194,60,255,.55));
 }
 
 @keyframes flutuar {
@@ -163,7 +158,7 @@ button:hover {
   50% { transform: translateY(-13px) rotate(3deg); }
 }
 
-/* Fotos dos animais atrás do conteúdo */
+/* Fotos dos animais */
 #fundoFotos {
   position: fixed;
   inset: 0;
@@ -181,9 +176,9 @@ button:hover {
   height: clamp(125px,27vw,245px);
   object-fit: cover;
   border-radius: 20px;
-  border: 2px solid rgba(255,255,255,0.35);
-  opacity: 0.76;
-  box-shadow: 0 0 25px rgba(255,255,255,0.18);
+  border: 2px solid rgba(255,255,255,.35);
+  opacity: .76;
+  box-shadow: 0 0 25px rgba(255,255,255,.18);
   animation: flutuar 5s ease-in-out infinite;
 }
 
@@ -194,90 +189,89 @@ button:hover {
 .foto-fundo:nth-child(5) { bottom: 5%; left: 3%; }
 .foto-fundo:nth-child(6) { bottom: 4%; right: 3%; }
 .foto-fundo:nth-child(7) {
-  top: 68%;
-  left: 36%;
+  top: 68%; left: 36%;
   width: clamp(140px,28vw,250px);
   height: clamp(115px,23vw,200px);
 }
 
-/* Cores das seções anteriores */
+/* Cores dos animais */
 body.anakin { background: #171717; }
-body.anakin::before { background: rgba(0,0,0,0.30); }
-
+body.anakin::before { background: rgba(0,0,0,.30); }
 body.melissa { background: #27083d; }
-body.melissa::before { background: rgba(35,0,55,0.28); }
-
+body.melissa::before { background: rgba(35,0,55,.28); }
 body.cigana { background: #542000; }
-body.cigana::before { background: rgba(65,25,0,0.30); }
-
+body.cigana::before { background: rgba(65,25,0,.30); }
 body.nos { background: #171313; }
-body.nos::before { background: rgba(30,12,0,0.30); }
-
+body.nos::before { background: rgba(30,12,0,.30); }
 body.vermelho { background: #650b24; }
-body.vermelho::before { background: rgba(70,0,20,0.66); }
+body.vermelho::before { background: rgba(70,0,20,.66); }
 
 body.anakin h1 {
   border-color: #777;
-  box-shadow: 0 0 18px rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.65);
+  box-shadow: 0 0 18px rgba(255,255,255,.2);
+  background: rgba(0,0,0,.65);
 }
-
 body.melissa h1 { border-color: #d52cff; }
-
 body.cigana h1 {
   border-color: #ff9a32;
   box-shadow: 0 0 18px #ff7b00;
-  background: rgba(65,25,0,0.75);
+  background: rgba(65,25,0,.75);
 }
-
 body.nos h1 {
   border-color: #ff8a28;
   box-shadow: 0 0 18px #ff7b00;
-  background: rgba(0,0,0,0.72);
+  background: rgba(0,0,0,.72);
 }
 
-/* NOVA PARTE: cinza e ciano */
-body.final-ciano {
-  background: #202a2d;
+/* =====================================
+   NOVA PARTE: NÃO, ACABOU
+   Fundo ilustrado em cinza e ciano
+===================================== */
+
+body.fim-ciano {
+  background: #18252a;
   color: #e8fbff;
+  background-attachment: fixed;
 }
 
-body.final-ciano::before {
-  background: linear-gradient(
-    135deg,
-    rgba(10,25,29,0.45),
-    rgba(50,80,85,0.48)
-  );
+body.fim-ciano::before {
+  background-image: url("./fundo-snoopy.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: .68;
+  filter: grayscale(.55) hue-rotate(145deg) saturate(.65);
+  background-color: rgba(15,30,35,.55);
 }
 
-body.final-ciano h1 {
-  color: #e8fcff;
-  background: rgba(17,35,40,0.72);
-  border: 2px solid #79e5ef;
-  box-shadow: 0 0 22px rgba(95,225,240,0.65);
-  text-shadow: 0 0 14px #8df4ff;
+body.fim-ciano h1 {
+  color: #e9fcff;
+  background: rgba(20,38,43,.82);
+  border: 2px solid #83e5ee;
+  box-shadow: 0 0 22px rgba(104,225,238,.65);
+  text-shadow: 0 0 13px rgba(130,240,255,.8);
 }
 
-body.final-ciano #mensagem {
-  color: #e9faff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(20px,4.6vw,27px);
+body.fim-ciano #mensagem {
+  color: #e8faff;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: clamp(19px,4.5vw,27px);
   line-height: 1.8;
-  text-shadow: 0 2px 7px #071316, 0 0 15px rgba(0,0,0,0.9);
+  text-shadow: 0 2px 7px #071317, 0 0 15px rgba(0,0,0,.9);
 }
 
-body.final-ciano button {
-  background: rgba(28,54,60,0.88);
-  border-color: #79e5ef;
-  box-shadow: 0 0 15px rgba(95,225,240,0.45);
+body.fim-ciano button {
+  color: #effcff;
+  background: rgba(26,58,65,.90);
+  border: 2px solid #83e5ee;
+  box-shadow: 0 0 15px rgba(111,225,237,.55);
 }
 
-body.final-ciano button:hover {
-  box-shadow: 0 0 25px #79e5ef;
+body.fim-ciano button:hover {
+  box-shadow: 0 0 25px #83e5ee;
 }
 
-/* Snoopy espalhados no fundo da parte cinza/ciano */
-#fundoSnoopy {
+#decoracaoFim {
   display: none;
   position: fixed;
   inset: 0;
@@ -286,79 +280,67 @@ body.final-ciano button:hover {
   overflow: hidden;
 }
 
-#fundoSnoopy.ativo { display: block; }
+body.fim-ciano #decoracaoFim { display: block; }
 
-.snoopy-fundo {
+.snoopy-decor {
   position: absolute;
-  width: clamp(145px,34vw,290px);
-  height: clamp(135px,30vw,250px);
+  width: clamp(115px,28vw,230px);
+  height: clamp(115px,28vw,230px);
   object-fit: contain;
-  opacity: 0.82;
-  filter: drop-shadow(0 0 17px rgba(110,230,240,0.55));
+  opacity: .90;
+  filter: drop-shadow(0 0 15px rgba(116,231,241,.55));
   animation: flutuar 6s ease-in-out infinite;
 }
 
-.snoopy-fundo:nth-child(1) {
-  top: 2%;
-  left: -3%;
+/* Snoopy em posições diferentes da tela roxa */
+.snoopy-decor:nth-child(1) {
+  top: 1%; left: -4%;
   transform: rotate(-12deg);
 }
-
-.snoopy-fundo:nth-child(2) {
-  top: 4%;
-  right: -4%;
-  transform: rotate(10deg);
+.snoopy-decor:nth-child(2) {
+  top: 3%; right: -5%;
+  width: clamp(145px,32vw,260px);
 }
-
-.snoopy-fundo:nth-child(3) {
-  top: 36%;
-  left: -5%;
-  transform: rotate(8deg);
+.snoopy-decor:nth-child(3) {
+  top: 39%; left: -8%;
+  width: clamp(130px,30vw,245px);
 }
-
-.snoopy-fundo:nth-child(4) {
-  top: 38%;
-  right: -5%;
-  transform: rotate(-10deg);
+.snoopy-decor:nth-child(4) {
+  top: 43%; right: -8%;
+  width: clamp(130px,30vw,245px);
 }
-
-.snoopy-fundo:nth-child(5) {
-  bottom: 3%;
-  left: 1%;
-  transform: rotate(-8deg);
+.snoopy-decor:nth-child(5) {
+  bottom: 1%; left: -4%;
+  width: clamp(135px,30vw,245px);
 }
-
-.snoopy-fundo:nth-child(6) {
-  bottom: 2%;
-  right: 0%;
-  transform: rotate(9deg);
+.snoopy-decor:nth-child(6) {
+  bottom: 0; right: -5%;
+  width: clamp(145px,32vw,260px);
 }
 
 #legenda {
   position: relative;
   z-index: 4;
   min-height: 100px;
-  width: min(96%,800px);
-  margin: 25px auto;
+  width: min(95%,800px);
+  margin: 20px auto;
   color: #e9fcff;
-  font-size: clamp(25px,6vw,38px);
-  font-weight: bold;
-  line-height: 1.5;
-  text-shadow: 0 0 12px #5ee7f4, 0 2px 8px black;
+  font-family: Georgia, serif;
+  font-size: clamp(23px,5vw,34px);
+  line-height: 1.7;
+  text-shadow: 0 0 12px #4bd9e9, 0 2px 5px #000;
 }
 
 @media (max-width:600px) {
   body { background-attachment: scroll; }
-
   #app { padding: 35px 16px; }
-
   h1 { margin-bottom: 30px; }
 
   .foto-fundo {
     width: 43vw;
     height: 155px;
     border-radius: 17px;
-    opacity: 0.72;
+    opacity: .72;
   }
 
   .foto-fundo:nth-child(1) { top: 5%; left: 1%; }
@@ -368,10 +350,8 @@ body.final-ciano button:hover {
   .foto-fundo:nth-child(5) { bottom: 5%; left: 0; }
   .foto-fundo:nth-child(6) { bottom: 5%; right: 0; }
   .foto-fundo:nth-child(7) {
-    top: 70%;
-    left: 35%;
-    width: 35vw;
-    height: 130px;
+    top: 70%; left: 35%;
+    width: 35vw; height: 130px;
   }
 
   #mensagem {
@@ -382,17 +362,12 @@ body.final-ciano button:hover {
     margin: 25px auto;
   }
 
-  .snoopy-fundo {
-    width: 47vw;
-    height: 180px;
-  }
-
-  .snoopy-fundo:nth-child(1) { top: 2%; left: -8%; }
-  .snoopy-fundo:nth-child(2) { top: 5%; right: -8%; }
-  .snoopy-fundo:nth-child(3) { top: 37%; left: -12%; }
-  .snoopy-fundo:nth-child(4) { top: 40%; right: -12%; }
-  .snoopy-fundo:nth-child(5) { bottom: 2%; left: -5%; }
-  .snoopy-fundo:nth-child(6) { bottom: 1%; right: -5%; }
+  .snoopy-decor:nth-child(1) { top: 2%; left: -10%; }
+  .snoopy-decor:nth-child(2) { top: 3%; right: -10%; }
+  .snoopy-decor:nth-child(3) { top: 40%; left: -13%; }
+  .snoopy-decor:nth-child(4) { top: 44%; right: -13%; }
+  .snoopy-decor:nth-child(5) { bottom: 1%; left: -10%; }
+  .snoopy-decor:nth-child(6) { bottom: 1%; right: -10%; }
 }
 </style>
 </head>
@@ -400,7 +375,15 @@ body.final-ciano button:hover {
 <body>
 
 <div id="fundoFotos"></div>
-<div id="fundoSnoopy"></div>
+
+<div id="decoracaoFim">
+  <img class="snoopy-decor" src="snoopy-coracao.png" alt="">
+  <img class="snoopy-decor" src="snoopy-cama.png" alt="">
+  <img class="snoopy-decor" src="snoopy-cozinhando.png" alt="">
+  <img class="snoopy-decor" src="snoopy-louca.png" alt="">
+  <img class="snoopy-decor" src="snoopy-coracao-2.png" alt="">
+  <img class="snoopy-decor" src="snoopy-coracao-4.png" alt="">
+</div>
 
 <div id="app">
   <h1 id="pergunta">Espero que goste independente das escolhas</h1>
@@ -409,26 +392,22 @@ body.final-ciano button:hover {
   <div id="legenda"></div>
   <div id="opcoes"></div>
 
-  <textarea id="campo"
-    placeholder="Escreva sua resposta..."
-    style="display:none"></textarea>
-
-  <button id="enviarTexto" style="display:none">
-    Enviar resposta
-  </button>
-
+  <textarea id="campo" placeholder="Escreva sua resposta..." style="display:none"></textarea>
+  <button id="enviarTexto" style="display:none">Enviar resposta</button>
   <p id="status"></p>
 </div>
 
 <audio id="musica" src="musica.mp3" preload="auto"></audio>
 <audio id="musicaFilhos" preload="auto"></audio>
-<audio id="musicaNao" preload="auto"></audio>
+<audio id="musicaIdiota" src="idiota.mp3" preload="auto"></audio>
+<audio id="musicaFim" src="musicalevocomigo.mp3" preload="auto"></audio>
 
 <script>
 const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
 
 const pergunta = document.getElementById("pergunta");
 const mensagem = document.getElementById("mensagem");
+const legenda = document.getElementById("legenda");
 const opcoes = document.getElementById("opcoes");
 const snoopy = document.getElementById("snoopy");
 const campo = document.getElementById("campo");
@@ -436,32 +415,17 @@ const enviarTexto = document.getElementById("enviarTexto");
 const status = document.getElementById("status");
 const musica = document.getElementById("musica");
 const musicaFilhos = document.getElementById("musicaFilhos");
-const musicaNao = document.getElementById("musicaNao");
+const musicaIdiota = document.getElementById("musicaIdiota");
+const musicaFim = document.getElementById("musicaFim");
 const fundoFotos = document.getElementById("fundoFotos");
-const fundoSnoopy = document.getElementById("fundoSnoopy");
-const legenda = document.getElementById("legenda");
 
-let temporizadores = [];
+const todosAudios = [musica, musicaFilhos, musicaIdiota, musicaFim];
 
 const fotos = {
-  anakin: [
-    "anakin.jpg", "anakin1.jpg", "anakin2.jpg",
-    "anakin3.jpg", "anakin4.jpg", "anakin5.jpg",
-    "anakin6.jpg"
-  ],
-  cigana: [
-    "cigana.jpg", "cigana2.jpg", "cigana3.jpg",
-    "cigana4.jpg", "cigana5.jpg", "cigana6.jpg"
-  ],
-  melissa: [
-    "melissa.jpg", "melissa2.jpg", "melissa3.jpg",
-    "melissa4.jpg", "melissa5.jpg"
-  ],
-  nos: [
-    "nos.png", "nos2.png", "nos3.png", "nos4.jpg",
-    "nos5.jpg", "nos6.jpg", "nos7.jpg",
-    "nos8.jpg", "nos9.jpg", "nos10.jpg"
-  ]
+  anakin: ["anakin.jpg","anakin1.jpg","anakin2.jpg","anakin3.jpg","anakin4.jpg","anakin5.jpg","anakin6.jpg"],
+  cigana: ["cigana.jpg","cigana2.jpg","cigana3.jpg","cigana4.jpg","cigana5.jpg","cigana6.jpg"],
+  melissa: ["melissa.jpg","melissa2.jpg","melissa3.jpg","melissa4.jpg","melissa5.jpg"],
+  nos: ["nos.png","nos2.png","nos3.png","nos4.jpg","nos5.jpg","nos6.jpg","nos7.jpg","nos8.jpg","nos9.jpg","nos10.jpg"]
 };
 
 const musicasDosFilhos = {
@@ -471,27 +435,15 @@ const musicasDosFilhos = {
   nos: "musicanos.mp3"
 };
 
-function pararTemporizadores() {
-  temporizadores.forEach(id => clearTimeout(id));
-  temporizadores = [];
-}
-
-function agendar(funcao, tempo) {
-  const id = setTimeout(funcao, tempo);
-  temporizadores.push(id);
-}
-
-function pararTodasAsMusicas() {
-  [musica, musicaFilhos, musicaNao].forEach(audio => {
-    audio.pause();
-    audio.currentTime = 0;
+function pararTodasMusicas() {
+  todosAudios.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
   });
 }
 
-function tocarAudio(audio, arquivo) {
-  pararTodasAsMusicas();
-  audio.src = arquivo;
-  audio.load();
+function tocar(audio) {
+  pararTodasMusicas();
   audio.play().catch(() => {
     status.textContent = "Toque na tela para iniciar a música.";
   });
@@ -503,9 +455,7 @@ function registrar(perguntaFeita, resposta) {
   fetch(ENDPOINT, {
     method: "POST",
     mode: "no-cors",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
     body: JSON.stringify({
       pergunta: perguntaFeita,
       resposta: resposta,
@@ -515,7 +465,6 @@ function registrar(perguntaFeita, resposta) {
 }
 
 function limpar() {
-  pararTemporizadores();
   opcoes.innerHTML = "";
   snoopy.innerHTML = "";
   mensagem.textContent = "";
@@ -526,8 +475,6 @@ function limpar() {
   status.textContent = "";
   fundoFotos.innerHTML = "";
   fundoFotos.classList.remove("ativo");
-  fundoSnoopy.innerHTML = "";
-  fundoSnoopy.classList.remove("ativo");
 }
 
 function botao(texto, acao) {
@@ -539,7 +486,6 @@ function botao(texto, acao) {
 
 function imagensSnoopy(nomes) {
   snoopy.innerHTML = "";
-
   nomes.forEach(nome => {
     const img = document.createElement("img");
     img.src = nome;
@@ -557,40 +503,34 @@ function colocarFotos(lista) {
     img.className = "foto-fundo";
     img.src = nome;
     img.alt = "Foto da nossa família";
-    img.onerror = () => { img.style.display = "none"; };
-    img.style.animationDelay = (indice * 0.35) + "s";
+    img.onerror = () => img.style.display = "none";
+    img.style.animationDelay = (indice * .35) + "s";
     fundoFotos.appendChild(img);
   });
 }
 
-function colocarSnoopyNoFundo() {
-  fundoSnoopy.innerHTML = "";
-  fundoSnoopy.classList.add("ativo");
+/* Efeito de digitação */
+let digitacaoAtual = null;
 
-  const desenhos = [
-    "snoopy-coracao.png",
-    "snoopy-cama.png",
-    "snoopy-coracao-1.png",
-    "snoopy-cozinhando.png",
-    "snoopy-louca.png",
-    "snoopy-coracao-2.png"
-  ];
+function digitar(texto, velocidade = 35) {
+  clearInterval(digitacaoAtual);
+  mensagem.textContent = "";
+  let i = 0;
 
-  desenhos.forEach((nome, indice) => {
-    const img = document.createElement("img");
-    img.className = "snoopy-fundo";
-    img.src = nome;
-    img.alt = "Snoopy";
-    img.onerror = () => { img.style.display = "none"; };
-    img.style.animationDelay = (indice * 0.45) + "s";
-    fundoSnoopy.appendChild(img);
-  });
+  digitacaoAtual = setInterval(() => {
+    mensagem.textContent += texto.charAt(i);
+    i++;
+
+    if (i >= texto.length) {
+      clearInterval(digitacaoAtual);
+    }
+  }, velocidade);
 }
 
 function iniciar() {
-  pararTodasAsMusicas();
-  limpar();
+  pararTodasMusicas();
   document.body.className = "";
+  limpar();
 
   pergunta.textContent = "Espero que goste independente das escolhas";
 
@@ -615,9 +555,8 @@ function iniciar() {
   });
 }
 
-/* Escolha dos filhos */
 function etapaFilhos() {
-  pararTodasAsMusicas();
+  pararTodasMusicas();
   limpar();
   document.body.className = "";
 
@@ -647,152 +586,124 @@ function etapaFilhos() {
 function etapaPet(tipo) {
   limpar();
   document.body.className = tipo;
-
   colocarFotos(fotos[tipo]);
-  tocarAudio(musicaFilhos, musicasDosFilhos[tipo]);
 
-  if (tipo === "anakin") {
-    pergunta.textContent = "Nosso querido Anakin 🖤";
-    mensagem.textContent =
-      "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤";
-  }
+  musicaFilhos.src = musicasDosFilhos[tipo];
+  tocar(musicaFilhos);
 
-  if (tipo === "melissa") {
-    pergunta.textContent = "Nossa linda Melissa Mel 💜";
-    mensagem.textContent =
-      "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel 💜";
-  }
+  const textos = {
+    anakin: [
+      "Nosso querido Anakin 🖤",
+      "E em meio ao pouco caos que estávamos em casa com as duas idosas, chegou um capetinha, ou melhor, um porcarinhazinha para agitar e animar nossa vida, o nosso querido filho Anakin que dorme com nós, nos perturba, pula nas nossas calças e vive miando por comida igual um desesperado. Nosso lindo filho 🖤"
+    ],
+    melissa: [
+      "Nossa linda Melissa Mel 💜",
+      "Esse aqui é a mais manhosa, ansiosa igual ao pai e observadora igual a mãe. Antes mesmo de eu chegar na sua vida, ela já era seu mundo, apenas sou um planeta do sistema solar que continuará dando sentido ao mesmo universo que vc ama. Nossa linda e bela Melissa Mel 💜"
+    ],
+    cigana: [
+      "Nossa querida Cigana 🧡",
+      "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk. Ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja."
+    ],
+    nos: [
+      "Nossa família 🖤🧡",
+      "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta."
+    ]
+  };
 
-  if (tipo === "cigana") {
-    pergunta.textContent = "Nossa querida Cigana 🧡";
-    mensagem.textContent =
-      "Lembro como se fosse ontem o trabalho para gente conseguir adotar ela, colocar ela dentro de casa, fazer ela comer ração, fazer ela ficar dentro de casa, fora as garras dela que rasgou o nosso colchão de ar novinho kkkkkkk ela é nossa filha mais senhora de alma, onde é preguiçosa, come e dorme além de se irritar fácil com agitação do Anakin. Nossa linda bola de pelo laranja que o melhor fato, é vc ser a mãe dela e quis adotar ela cmg mesmo ela sendo mais de idade";
-  }
-
-  if (tipo === "nos") {
-    pergunta.textContent = "Nossa família 🖤🧡";
-    mensagem.textContent =
-      "Aqui estamos nós, a nossa família reunida, cada um de nós somos um planeta nesse universo enquanto VOCÊ Sarah Isabel, é o sol que ilumina a nossa existência. Graças a vc estamos todos ligados diretamente e somos uma família um pouco caótica mas muito feliz e amorosa. Amo muito você, igual amo cada um dos nossos filhos.\n\nE é claro, a nossa Diana terá lindas irmãs e um irmão capeta";
-  }
+  pergunta.textContent = textos[tipo][0];
+  mensagem.textContent = textos[tipo][1];
 
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* NOVA ETAPA: NÃO, ACABOU */
+/* Nova tela cinza e ciano */
 function etapaNaoAcabou() {
-  pararTodasAsMusicas();
+  pararTodasMusicas();
   limpar();
-  document.body.className = "final-ciano";
+  document.body.className = "fim-ciano";
 
-  pergunta.textContent = "O que você realmente deseja?";
+  pergunta.textContent = "O que você deseja?";
 
-  botao("☝️ Realmente acabou?", () => {
+  botao("☝️  Realmente acabou?", () => {
     registrar("NÃO, Acabou.", "Realmente acabou?");
     etapaRealmenteAcabou();
   });
 
-  botao("☝️ Esse é o fim", () => {
+  botao("☝️  Esse é o fim", () => {
     registrar("NÃO, Acabou.", "Esse é o fim");
-    etapaEsseEofim();
+    etapaEsseEFim();
   });
 
   botao("Voltar ❤️", iniciar);
 }
 
-/* Mensagem digitada com Snoopy no fundo */
 function etapaRealmenteAcabou() {
+  pararTodasMusicas();
   limpar();
-  document.body.className = "final-ciano";
-  colocarSnoopyNoFundo();
-  tocarAudio(musicaNao, "idiota.mp3");
+  document.body.className = "fim-ciano";
 
   pergunta.textContent = "Realmente acabou?";
 
   const texto =
     "Eu sei muito bem o meu erro, eu nunca quis controlar suas finanças, nem ver os seus gastos, nem duvidar de vc. A questão é que meu lado tóxico é entregar tudo meu para você, te proporcionar o melhor material possível, só que isso é apenas e unicamente para você. Se for babaca, podre, ruim de minha parte isso não importa, não tinha nada que mais me irritava do que você ter que gastar com os outros algo que você suou para ter enquanto, e ao eu oferecer isso, queria um egocentrismo de você para você, como também queria que ser unicamente para você fosse valorizado.";
 
-  mensagem.textContent = "";
-  let indice = 0;
+  digitar(texto, 38);
+  tocar(musicaIdiota);
 
-  function digitar() {
-    if (indice < texto.length) {
-      mensagem.textContent += texto.charAt(indice);
-      indice++;
-      agendar(digitar,  thirtyFive());
-    }
-  }
-
-  digitar();
-
-  botao("Voltar às opções ❤️", etapaNaoAcabou);
+  botao("Voltar ❤️", etapaNaoAcabou);
 }
 
-function thirtyFive() {
-  return 35;
-}
-
-/* Música com legendas */
-function etapaEsseEofim() {
+/* Legenda sincronizada com o áudio */
+function etapaEsseEFim() {
+  pararTodasMusicas();
   limpar();
-  document.body.className = "final-ciano";
-  colocarSnoopyNoFundo();
-  tocarAudio(musicaNao, "musicalevocomigo.mp3");
+  document.body.className = "fim-ciano";
 
-  pergunta.textContent = "Esse é o fim";
-  mensagem.textContent = "Te levo comigo ❤️";
+  pergunta.textContent = "Te levo comigo ❤️";
+  legenda.textContent = " ";
 
-  const partes = [
-    [0, "Mas dessa vez eu já decidi"],
-    [5000, "Quero ver teus olhos ao dizer..."],
-    [10500, "Tudo aquilo que eu só consegui sentir com você"],
-    [17500, "E eu vouoou te esperar..."],
-    [22500, "Aonde quer que eu váaaa"],
-    [27500, "Aonde quer que eu váaaa"],
-    [32000, "Te levo comigo"],
-    [39000, "E eu vouoou te esperar..."],
-    [44000, "Aonde quer que eu váaaa"],
-    [49000, "Aonde quer que eu váaaa"],
-    [54000, "Te levo comigo ❤️"]
+  tocar(musicaFim);
+
+  /*
+    Tempos aproximados em segundos.
+    Ajuste os valores depois de testar no site,
+    caso a sua gravação tenha pausas diferentes.
+  */
+  const versos = [
+    {t: 0, texto: "Mas dessa vez eu já decidi"},
+    {t: 4, texto: "Quero ver teus olhos ao dizer..."},
+    {t: 8, texto: "Tudo aquilo que eu só consegui sentir com você"},
+    {t: 14, texto: "E eu vouoou te esperar..."},
+    {t: 18, texto: "Aonde quer que eu váaaa"},
+    {t: 22, texto: "Aonde quer que eu vá"},
+    {t: 25, texto: "Te levo comigo"},
+    {t: 30, texto: "E eu vouoou te esperar..."},
+    {t: 34, texto: "Aonde quer que eu váaaa"},
+    {t: 38, texto: "Aonde quer que eu vá"},
+    {t: 41, texto: "Te levo comigo ❤️"}
   ];
 
-  partes.forEach(([tempo, texto]) => {
-    agendar(() => {
-      legenda.textContent = texto;
-    }, tempo);
-  });
+  let versoAtual = -1;
 
-  botao("Voltar às opções ❤️", () => {
-    pararTodasAsMusicas();
-    etapaNaoAcabou();
-  });
+  musicaFim.ontimeupdate = () => {
+    const tempo = musicaFim.currentTime;
+
+    for (let i = versos.length - 1; i >= 0; i--) {
+      if (tempo >= versos[i].t) {
+        if (versoAtual !== i) {
+          versoAtual = i;
+          legenda.textContent = versos[i].texto;
+        }
+        break;
+      }
+    }
+  };
+
+  botao("Voltar ❤️", etapaNaoAcabou);
 }
 
-/* Parte Sim antiga */
-function etapaSim() {
-  pararTodasAsMusicas();
-  limpar();
-
-  pergunta.textContent = "Eu também te amo ❤️";
-  mensagem.textContent = "Você ainda é muito especial para mim.";
-
-  imagensSnoopy([
-    "snoopy-coracao.png",
-    "snoopy-coracao-1.png",
-    "snoopy-coracao-2.png",
-    "snoopy-coracao-3.png",
-    "snoopy-coracao-4.png",
-    "snoopy-coracao.png"
-  ]);
-
-  botao("Continuar", () => {
-    limpar();
-    pergunta.textContent = "Obrigado por responder ❤️";
-  });
-}
-
-/* Talvez */
 function etapaTalvez() {
-  pararTodasAsMusicas();
+  pararTodasMusicas();
   limpar();
   document.body.className = "vermelho";
 
@@ -814,28 +725,21 @@ function etapaTalvez() {
     }
 
     registrar(pergunta.textContent, resposta);
-
     campo.style.display = "none";
     enviarTexto.style.display = "none";
     opcoes.innerHTML = "";
-
     pergunta.textContent = "Obrigado por me responder.";
     mensagem.textContent = resposta;
     status.textContent = "Resposta enviada ❤️";
   };
 }
 
-/* Gravidez */
 function etapaGravidez() {
-  pararTodasAsMusicas();
+  pararTodasMusicas();
   limpar();
   document.body.className = "";
 
-  musica.currentTime = 0;
-  musica.play().catch(() => {
-    status.textContent = "Toque na tela para iniciar a música.";
-  });
-
+  tocar(musica);
   pergunta.textContent = "Vc quer que esteja grávida?";
 
   botao("♡  Sim, quero muito", () => {
@@ -845,28 +749,21 @@ function etapaGravidez() {
 
   botao("♡  Não.", () => {
     registrar(pergunta.textContent, "Não");
-    pararTodasAsMusicas();
+    pararTodasMusicas();
     limpar();
     pergunta.textContent = "Obrigado por responder ❤️";
   });
 }
 
 function etapaFinal() {
-  pararTodasAsMusicas();
+  pararTodasMusicas();
   limpar();
   document.body.className = "";
 
   pergunta.textContent = "❤️";
 
   mensagem.textContent =
-    "Então se cuide direito, coma por duas, beba água por duas, " +
-    "tenha cuidado mental por duas. Estarei indo cuidar de você " +
-    "e cuidar da Diana, errei em muitas coisas, eu sei, mas também " +
-    "sei o quão te amo e o quanto quero que você seja a mãe da Diana, " +
-    "pois uma bebezinha com o seu rosto será tão perfeita quanto você. " +
-    "E vc será a mais incrível desse mundo enquanto cuidamos dela " +
-    "desde cedo para irmos pro Canadá. Então, se cuidar pelas duas " +
-    "e me espere que estou indo.";
+    "Então se cuide direito, coma por duas, beba água por duas, tenha cuidado mental por duas. Estarei indo cuidar de você e cuidar da Diana, errei em muitas coisas, eu sei, mas também sei o quão te amo e o quanto quero que você seja a mãe da Diana, pois uma bebezinha com o seu rosto será tão perfeita quanto você. E vc será a mais incrível desse mundo enquanto cuidamos dela desde cedo para irmos pro Canadá. Então, se cuidar pelas duas e me espere que estou indo.";
 
   imagensSnoopy([
     "snoopy-cozinhando.png",
@@ -882,6 +779,5 @@ function etapaFinal() {
 
 iniciar();
 </script>
-
 </body>
 </html>
