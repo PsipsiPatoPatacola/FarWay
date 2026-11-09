@@ -6,9 +6,7 @@
 <title>Uma pergunta para você ❤️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
   margin: 0;
@@ -79,9 +77,7 @@ h1 {
   text-shadow: 0 2px 5px #000, 0 0 12px rgba(0,0,0,.95);
 }
 
-#mensagem:empty {
-  display: none;
-}
+#mensagem:empty { display: none; }
 
 #opcoes {
   position: relative;
@@ -101,14 +97,14 @@ button {
   font-size: clamp(17px,4vw,23px);
   color: white;
   background: rgba(55,5,91,.91);
-  box-shadow: 0 0 12px rgba(190,35,255,.65);
+  box-shadow: 0 0 12px rgba(190,35,255,.45);
   cursor: pointer;
   transition: .25s;
 }
 
 button:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 22px #d52cff;
+  box-shadow: 0 0 18px rgba(213,44,255,.65);
 }
 
 #campo {
@@ -127,10 +123,7 @@ button:hover {
   margin-bottom: 15px;
 }
 
-#enviarTexto, #status {
-  position: relative;
-  z-index: 5;
-}
+#enviarTexto, #status { position: relative; z-index: 5; }
 
 #status {
   font-size: 15px;
@@ -148,16 +141,14 @@ button:hover {
   margin: 15px 0;
 }
 
-#snoopy:empty {
-  display: none;
-}
+#snoopy:empty { display: none; }
 
 #snoopy img {
   width: 100%;
   height: 115px;
   object-fit: contain;
   animation: flutuar 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 7px rgba(194,60,255,.55));
+  filter: drop-shadow(0 0 5px rgba(194,60,255,.35));
 }
 
 @keyframes flutuar {
@@ -165,7 +156,7 @@ button:hover {
   50% { transform: translateY(-13px) rotate(3deg); }
 }
 
-/* Fotos */
+/* Fotos de fundo */
 #fundoFotos {
   position: fixed;
   inset: 0;
@@ -175,9 +166,7 @@ button:hover {
   display: none;
 }
 
-#fundoFotos.ativo {
-  display: block;
-}
+#fundoFotos.ativo { display: block; }
 
 .foto-fundo {
   position: absolute;
@@ -187,7 +176,7 @@ button:hover {
   border-radius: 20px;
   border: 2px solid rgba(255,255,255,.35);
   opacity: .76;
-  box-shadow: 0 0 25px rgba(255,255,255,.18);
+  box-shadow: 0 0 20px rgba(255,255,255,.12);
   animation: flutuar 5s ease-in-out infinite;
 }
 
@@ -217,7 +206,7 @@ body.cigana::before { background: rgba(65,25,0,.30); }
 body.nos::before { background: rgba(30,12,0,.30); }
 body.vermelho::before { background: rgba(70,0,20,.66); }
 
-/* Tema cinza e ciano */
+/* Tela cinza e ciano */
 body.fim-ciano {
   background: #18252a;
   color: #e8fbff;
@@ -239,7 +228,7 @@ body.fim-ciano h1 {
   background: transparent;
   border: none;
   box-shadow: none;
-  text-shadow: 0 0 13px rgba(130,240,255,.8);
+  text-shadow: 0 0 9px rgba(130,240,255,.45);
   padding: 10px;
 }
 
@@ -248,18 +237,18 @@ body.fim-ciano #mensagem {
   font-family: "Trebuchet MS", Arial, sans-serif;
   font-size: clamp(19px,4.5vw,27px);
   line-height: 1.8;
-  text-shadow: 0 2px 7px #071317, 0 0 15px rgba(0,0,0,.9);
+  text-shadow: 0 2px 7px #071317, 0 0 10px rgba(0,0,0,.85);
 }
 
 body.fim-ciano button {
   color: #effcff;
   background: rgba(26,58,65,.90);
   border: 2px solid #83e5ee;
-  box-shadow: 0 0 15px rgba(111,225,237,.55);
+  box-shadow: 0 0 10px rgba(111,225,237,.35);
 }
 
 body.fim-ciano button:hover {
-  box-shadow: 0 0 25px #83e5ee;
+  box-shadow: 0 0 16px rgba(131,229,238,.55);
 }
 
 /* Luvinhas animadas */
@@ -268,42 +257,38 @@ body.fim-ciano button:hover {
   font-size: 31px;
   vertical-align: middle;
   margin-right: 12px;
-  filter: drop-shadow(0 0 5px #b8faff);
+  filter: drop-shadow(0 0 4px rgba(184,250,255,.55));
   transform-origin: bottom center;
   animation: luvaAnimada 1.15s ease-in-out infinite;
 }
 
-#opcoes button:nth-child(2) .luvinha {
-  animation-delay: .55s;
-}
+#opcoes button:nth-child(2) .luvinha { animation-delay: .55s; }
 
 @keyframes luvaAnimada {
   0%,100% { transform: translateY(0) rotate(-13deg) scale(1); }
-  25% { transform: translateY(-10px) rotate(12deg) scale(1.12); }
-  50% { transform: translateY(-3px) rotate(-8deg) scale(1.05); }
-  75% { transform: translateY(-12px) rotate(14deg) scale(1.12); }
+  25% { transform: translateY(-8px) rotate(12deg) scale(1.10); }
+  50% { transform: translateY(-3px) rotate(-8deg) scale(1.04); }
+  75% { transform: translateY(-9px) rotate(14deg) scale(1.10); }
 }
 
 body.fim-ciano #opcoes button {
   animation: botaoJogo 2s ease-in-out infinite;
 }
 
-body.fim-ciano #opcoes button:nth-child(2) {
-  animation-delay: 1s;
-}
+body.fim-ciano #opcoes button:nth-child(2) { animation-delay: 1s; }
 
 @keyframes botaoJogo {
   0%,45%,100% {
-    box-shadow: 0 0 12px rgba(111,225,237,.45);
+    box-shadow: 0 0 9px rgba(111,225,237,.30);
     border-color: #83e5ee;
   }
   20% {
-    box-shadow: 0 0 25px rgba(111,225,237,.95);
+    box-shadow: 0 0 15px rgba(111,225,237,.65);
     border-color: #d2fbff;
   }
 }
 
-/* Decoração Snoopy */
+/* Snoopy decorativo */
 #decoracaoFim {
   display: none;
   position: fixed;
@@ -313,9 +298,7 @@ body.fim-ciano #opcoes button:nth-child(2) {
   overflow: hidden;
 }
 
-body.fim-ciano #decoracaoFim {
-  display: block;
-}
+body.fim-ciano #decoracaoFim { display: block; }
 
 .snoopy-decor {
   position: absolute;
@@ -323,7 +306,7 @@ body.fim-ciano #decoracaoFim {
   height: clamp(115px,28vw,230px);
   object-fit: contain;
   opacity: .90;
-  filter: drop-shadow(0 0 15px rgba(116,231,241,.55));
+  filter: drop-shadow(0 0 10px rgba(116,231,241,.30));
   animation: flutuar 6s ease-in-out infinite;
 }
 
@@ -334,7 +317,7 @@ body.fim-ciano #decoracaoFim {
 .snoopy-decor:nth-child(5) { bottom: 1%; left: -4%; width: clamp(135px,30vw,245px); }
 .snoopy-decor:nth-child(6) { bottom: 0; right: -5%; width: clamp(145px,32vw,260px); }
 
-/* Letra da música: neon moderado */
+/* Letra da música: neon suave */
 #legenda {
   position: relative;
   z-index: 4;
@@ -349,58 +332,46 @@ body.fim-ciano #decoracaoFim {
   line-height: 1.65;
   text-align: center;
   text-shadow:
-    0 0 3px #fff,
-    0 0 7px #b8faff,
-    0 0 13px #55eaff,
-    0 0 22px #20cfff;
+    0 0 2px #fff,
+    0 0 4px #b8faff,
+    0 0 8px rgba(85,234,255,.55);
 }
 
-/* Animação de entrada e movimento contínuo */
 #legenda.animar {
   animation:
-    entradaLetra 1s ease both,
-    flutuarLetra 3s ease-in-out infinite 1s,
-    neonSuave 2.5s ease-in-out infinite 1s;
+    entradaLetra .8s ease both,
+    flutuarLetra 3s ease-in-out infinite .8s,
+    neonSuave 3s ease-in-out infinite .8s;
 }
 
 @keyframes entradaLetra {
-  0% {
-    opacity: 0;
-    filter: blur(6px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-  }
+  0% { opacity: 0; filter: blur(4px); }
+  100% { opacity: 1; filter: blur(0); }
 }
 
 @keyframes neonSuave {
   0%,100% {
     text-shadow:
-      0 0 3px #fff,
-      0 0 7px #b8faff,
-      0 0 13px #55eaff,
-      0 0 22px #20cfff;
+      0 0 2px #fff,
+      0 0 4px #b8faff,
+      0 0 8px rgba(85,234,255,.55);
   }
   50% {
     text-shadow:
-      0 0 4px #fff,
-      0 0 10px #b8faff,
-      0 0 17px #55eaff,
-      0 0 29px #20cfff;
+      0 0 3px #fff,
+      0 0 6px #b8faff,
+      0 0 11px rgba(85,234,255,.65);
   }
 }
 
 @keyframes flutuarLetra {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-5px); }
 }
 
 @media (max-width:600px) {
   body { background-attachment: scroll; }
-
   #app { padding: 35px 16px; }
-
   h1 { margin-bottom: 30px; }
 
   .foto-fundo {
@@ -511,10 +482,12 @@ const musicasDosFilhos = {
   nos: "musicanos.mp3"
 };
 
+let digitacaoAtual = null;
+
 function pararTodasMusicas() {
-  todosAudios.forEach(a => {
-    a.pause();
-    a.currentTime = 0;
+  todosAudios.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
   });
 
   musicaFim.ontimeupdate = null;
@@ -527,8 +500,6 @@ function tocar(audio) {
     status.textContent = "Toque na tela para iniciar a música.";
   });
 }
-
-let digitacaoAtual = null;
 
 function limpar() {
   clearInterval(digitacaoAtual);
@@ -589,7 +560,10 @@ function digitar(texto, velocidade = 35) {
     mensagem.textContent += texto.charAt(i);
     i++;
 
-    if (i >= texto.length) clearInterval(digitacaoAtual);
+    if (i >= texto.length) {
+      clearInterval(digitacaoAtual);
+      digitacaoAtual = null;
+    }
   }, velocidade);
 }
 
@@ -737,7 +711,6 @@ function etapaRealmenteAcabou() {
   tocar(musicaIdiota);
 }
 
-/* Atualiza a frase e reinicia as animações */
 function mostrarVerso(texto) {
   legenda.classList.remove("animar");
   void legenda.offsetWidth;
@@ -752,28 +725,39 @@ function etapaEsseEFim() {
   pergunta.style.display = "none";
 
   /*
-    Coloque aqui as frases que você deseja exibir.
-    Os tempos abaixo são exemplos e precisam corresponder
-    aos momentos da sua gravação musicalevocomigo.mp3.
+    Esta gravação começa na ponte:
+    "Mas dessa vez eu já decidi"
+    e segue para os dois refrões finais.
   */
   const versos = [
-    {t: 0, texto: "Mas dessa vez eu já decidi"},
-    {t: 4, texto: "Quero ver teus olhos ao dizer..."},
-    {t: 8, texto: "Te levo comigo"},
-    {t: 14, texto: "E eu vou te esperar"},
-    {t: 20, texto: "Aonde quer que eu vá"},
-    {t: 26, texto: "Te levo comigo ❤️"}
+    {t: 0.0, texto: "Mas dessa vez eu já decidi"},
+    {t: 3.5, texto: "Quero ver teus olhos ao dizer"},
+    {t: 7.8, texto: "Tudo aquilo que eu só consegui"},
+    {t: 11.7, texto: "Sentir com você"},
+    {t: 15.0, texto: "E eu vou te esperar"},
+    {t: 18.2, texto: "Aonde quer que eu vá"},
+    {t: 21.3, texto: "Aonde quer que eu vá"},
+    {t: 24.1, texto: "Te levo comigo"},
+    {t: 27.6, texto: "E eu vou te esperar"},
+    {t: 30.8, texto: "Aonde quer que eu vá"},
+    {t: 34.0, texto: "Aonde quer que eu vá"},
+    {t: 37.0, texto: "Te levo comigo"},
+    {t: 40.3, texto: "E eu vou te esperar"},
+    {t: 43.0, texto: "Aonde quer que eu vá"},
+    {t: 45.2, texto: "Te levo comigo"}
   ];
 
   let versoAtual = -1;
 
-  /* Inicia a música primeiro */
-  tocar(musicaFim);
+  /* Toca o áudio e depois instala o evento de sincronização */
+  musicaFim.currentTime = 0;
 
-  /* Instala o evento depois de tocar(), para não ser apagado */
+  musicaFim.play().catch(() => {
+    status.textContent = "Toque na tela para iniciar a música.";
+  });
+
   musicaFim.ontimeupdate = () => {
     const tempo = musicaFim.currentTime;
-
     let novoVerso = -1;
 
     for (let i = versos.length - 1; i >= 0; i--) {
@@ -789,7 +773,10 @@ function etapaEsseEFim() {
     }
   };
 
-  /* Mostra a primeira frase imediatamente */
+  musicaFim.onended = () => {
+    legenda.classList.remove("animar");
+  };
+
   versoAtual = 0;
   mostrarVerso(versos[0].texto);
 }
