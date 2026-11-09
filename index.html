@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -193,7 +194,7 @@ button:hover {
   height: clamp(115px,23vw,200px);
 }
 
-/* Temas */
+/* Temas dos animais e família */
 body.anakin { background: #171717; }
 body.melissa { background: #27083d; }
 body.cigana { background: #542000; }
@@ -206,9 +207,7 @@ body.cigana::before { background: rgba(65,25,0,.30); }
 body.nos::before { background: rgba(30,12,0,.30); }
 body.vermelho::before { background: rgba(70,0,20,.66); }
 
-/* NOVOS TEMAS: RAMIFICAÇÃO "POR QUE VOCÊ É ASSIM" */
-
-/* Fundo vermelho com os mesmos Snoopy do fundo original */
+/* Nova ramificação: Por que você é assim */
 body.talvez-vermelho {
   background: #39000b;
 }
@@ -219,7 +218,6 @@ body.talvez-vermelho::before {
   opacity: .85;
 }
 
-/* Fundo laranja com os mesmos Snoopy do fundo original */
 body.talvez-laranja {
   background: #421900;
 }
@@ -230,7 +228,6 @@ body.talvez-laranja::before {
   opacity: .88;
 }
 
-/* Aparência das telas de texto */
 body.talvez-vermelho h1,
 body.talvez-laranja h1 {
   background: rgba(20,0,0,.72);
@@ -283,11 +280,6 @@ body.talvez-vermelho button:hover {
 
 body.talvez-laranja button:hover {
   box-shadow: 0 0 18px rgba(255,160,50,.75);
-}
-
-#botaoVoltar {
-  width: min(100%,400px);
-  margin: 10px auto 25px;
 }
 
 /* Tela cinza e ciano */
@@ -547,6 +539,8 @@ body.fim-ciano #decoracaoFim { display: block; }
 <audio id="musicaFilhos" preload="auto"></audio>
 <audio id="musicaIdiota" src="idiota.mp3" preload="auto"></audio>
 <audio id="musicaFim" src="musicalevocomigo.mp3" preload="auto"></audio>
+<audio id="musicaSinceridade" src="sinceridade.mp3" preload="auto"></audio>
+<audio id="musicaSinofato" src="sinofato.mp3" preload="auto"></audio>
 
 <script>
 const ENDPOINT = "COLE_AQUI_O_LINK_DO_APPS_SCRIPT";
@@ -563,9 +557,18 @@ const musica = document.getElementById("musica");
 const musicaFilhos = document.getElementById("musicaFilhos");
 const musicaIdiota = document.getElementById("musicaIdiota");
 const musicaFim = document.getElementById("musicaFim");
+const musicaSinceridade = document.getElementById("musicaSinceridade");
+const musicaSinofato = document.getElementById("musicaSinofato");
 const fundoFotos = document.getElementById("fundoFotos");
 
-const todosAudios = [musica, musicaFilhos, musicaIdiota, musicaFim];
+const todosAudios = [
+  musica,
+  musicaFilhos,
+  musicaIdiota,
+  musicaFim,
+  musicaSinceridade,
+  musicaSinofato
+];
 
 const fotos = {
   anakin: ["anakin.jpg","anakin1.jpg","anakin2.jpg","anakin3.jpg","anakin4.jpg","anakin5.jpg","anakin6.jpg"],
@@ -698,7 +701,6 @@ function iniciar() {
     etapaNaoAcabou();
   });
 
-  /* Nova opção independente no menu inicial */
   botao("♡  Por que você é assim Caralho?", () => {
     registrar(pergunta.textContent, "Por que você é assim Caralho?");
     etapaTalvez();
@@ -875,7 +877,7 @@ function etapaEsseEFim() {
   mostrarVerso(versos[0].texto);
 }
 
-/* NOVA TELA: OPÇÃO INDEPENDENTE DO MENU */
+/* Menu da nova opção */
 function etapaTalvez() {
   pararTodasMusicas();
   limpar();
@@ -899,7 +901,7 @@ function etapaTalvez() {
   botao("Voltar às opções", iniciar);
 }
 
-/* PRIMEIRA ESCOLHA: TEMA VERMELHO */
+/* Opção sinceridade: música sinceridade.mp3 */
 function etapaSinceridade() {
   pararTodasMusicas();
   limpar();
@@ -907,19 +909,23 @@ function etapaSinceridade() {
 
   pergunta.textContent = "Quero sua sinceridade";
 
+  tocar(musicaSinceridade);
+
   mensagem.textContent =
     "Peço desculpas pelas vezes que eu não consegui te entender, que não pensei na situação toda, além de que foi pouco empático ou 0 de empatia. Por tornar as coisas difíceis quando eu deveria torná-las mais fáceis ou ajudar como apoio sobre. Eu juro que realmente, todos os dias, eu pensava assim, pensava quando cozinhava para você, quando limpava para você não sentir um cheiro ruim mesmo eu morrendo de dor. Eu pensava em tornar mais fáceis e servir de apoio, eu não esperava que vc reconhecesse cada coisa que eu fizesse, apenas...que eu não me sentisse isolado, principalmente sobre vc ter pedido desculpas sobre não me defender na minha frente, da mesma forma que é vergonhoso para você fazer isso, que tinha vergonha de eu ver você assim sendo ignorante e briguenta com sua família, eu também tenho vergonha de falar que queria que fosse assim, e assim, e que eu fiz isso mas esperava um sorriso sobre isso ou um obrigado diretamente.\n\nSinto muito pelos momento que minhas emoções falaram mais alto e acabaram te machucando, quando você me bateu e mandou eu sair de casa, eu não questionei em nenhum momento essa decisão, mas dá mesma forma que suas emoções que eu causei, lhe fizeram me bater, é a mesma linha que eu chego no limite sobre tal coisa. Muita coisa aconteceu sobre, e eu estou cansado, assim como você, e eu não quero mais que você pense e fale com todos, queria que você olhasse mais para você mesma, como se só você importasse e nada além do seu redor, onde tudo é para você, da sua forma, do seu jeito, mas que eu tivesse noção sobre pois você falasse enquanto age para você unicamente.";
 
   botao("Voltar às opções", etapaTalvez);
 }
 
-/* SEGUNDA ESCOLHA: TEMA LARANJA */
+/* Opção o que você quer de fato: música sinofato.mp3 */
 function etapaOQueQuer() {
   pararTodasMusicas();
   limpar();
   document.body.className = "talvez-laranja";
 
   pergunta.textContent = "Quero só saber o que vc quer de fato";
+
+  tocar(musicaSinofato);
 
   mensagem.textContent =
     "Eu só quero ir para longe, bem longe de tudo e todos, quando não podiam nem chegar na porta da nossa casa, eu nunca fiquei tão leve na minha vida, me lembrou o começo da gente em Pirangi, além de depois que suas irmas foram embora de lá, aquela leveza, sabe? Você tem seus problemas onde são só seus, eu não me intrometo nisso, mas é impossível não sentir nenhum pingo de raiva quando te afetam diretamente e mudam até o seu humor. Eu só quero ir para longe com você e nossos filhos, só quero ter que acordar 6horas da manhã num frio de -14 graus para tirar a neve da porta de casa. Só quero ter que aprender a trocar pneus normais para pneus de neve porque no Canadá é lei. \"O que eu queria era te levar daqui para nunca mais...\", eu já ouvi que eu não servia para te fazer feliz, que eu como o seu juízo, eu nunca concordei com isso, que eu faço você perder a linha? Sim, mas sempre quando foi só nós diretamente, sem nenhum família meu ou seu, eu quero essa paz, essa leveza, essa vida de eu e você sem família intrometida.";
