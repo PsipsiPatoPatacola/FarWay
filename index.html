@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -125,7 +124,10 @@ button:hover {
   margin-bottom: 15px;
 }
 
-#enviarTexto, #status { position: relative; z-index: 5; }
+#enviarTexto, #status {
+  position: relative;
+  z-index: 5;
+}
 
 #status {
   font-size: 15px;
@@ -189,7 +191,8 @@ button:hover {
 .foto-fundo:nth-child(5) { bottom: 5%; left: 3%; }
 .foto-fundo:nth-child(6) { bottom: 4%; right: 3%; }
 .foto-fundo:nth-child(7) {
-  top: 68%; left: 36%;
+  top: 68%;
+  left: 36%;
   width: clamp(140px,28vw,250px);
   height: clamp(115px,23vw,200px);
 }
@@ -197,12 +200,16 @@ button:hover {
 /* Cores dos animais */
 body.anakin { background: #171717; }
 body.anakin::before { background: rgba(0,0,0,.30); }
+
 body.melissa { background: #27083d; }
 body.melissa::before { background: rgba(35,0,55,.28); }
+
 body.cigana { background: #542000; }
 body.cigana::before { background: rgba(65,25,0,.30); }
+
 body.nos { background: #171313; }
 body.nos::before { background: rgba(30,12,0,.30); }
+
 body.vermelho { background: #650b24; }
 body.vermelho::before { background: rgba(70,0,20,.66); }
 
@@ -211,23 +218,22 @@ body.anakin h1 {
   box-shadow: 0 0 18px rgba(255,255,255,.2);
   background: rgba(0,0,0,.65);
 }
+
 body.melissa h1 { border-color: #d52cff; }
+
 body.cigana h1 {
   border-color: #ff9a32;
   box-shadow: 0 0 18px #ff7b00;
   background: rgba(65,25,0,.75);
 }
+
 body.nos h1 {
   border-color: #ff8a28;
   box-shadow: 0 0 18px #ff7b00;
   background: rgba(0,0,0,.72);
 }
 
-/* =====================================
-   NOVA PARTE: NÃO, ACABOU
-   Fundo ilustrado em cinza e ciano
-===================================== */
-
+/* Parte cinza e ciano */
 body.fim-ciano {
   background: #18252a;
   color: #e8fbff;
@@ -244,12 +250,15 @@ body.fim-ciano::before {
   background-color: rgba(15,30,35,.55);
 }
 
+/* Títulos sem caixas na parte cinza e ciano */
 body.fim-ciano h1 {
   color: #e9fcff;
-  background: rgba(20,38,43,.82);
-  border: 2px solid #83e5ee;
-  box-shadow: 0 0 22px rgba(104,225,238,.65);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   text-shadow: 0 0 13px rgba(130,240,255,.8);
+  padding: 10px;
 }
 
 body.fim-ciano #mensagem {
@@ -292,29 +301,39 @@ body.fim-ciano #decoracaoFim { display: block; }
   animation: flutuar 6s ease-in-out infinite;
 }
 
-/* Snoopy em posições diferentes da tela roxa */
 .snoopy-decor:nth-child(1) {
-  top: 1%; left: -4%;
+  top: 1%;
+  left: -4%;
   transform: rotate(-12deg);
 }
+
 .snoopy-decor:nth-child(2) {
-  top: 3%; right: -5%;
+  top: 3%;
+  right: -5%;
   width: clamp(145px,32vw,260px);
 }
+
 .snoopy-decor:nth-child(3) {
-  top: 39%; left: -8%;
+  top: 39%;
+  left: -8%;
   width: clamp(130px,30vw,245px);
 }
+
 .snoopy-decor:nth-child(4) {
-  top: 43%; right: -8%;
+  top: 43%;
+  right: -8%;
   width: clamp(130px,30vw,245px);
 }
+
 .snoopy-decor:nth-child(5) {
-  bottom: 1%; left: -4%;
+  bottom: 1%;
+  left: -4%;
   width: clamp(135px,30vw,245px);
 }
+
 .snoopy-decor:nth-child(6) {
-  bottom: 0; right: -5%;
+  bottom: 0;
+  right: -5%;
   width: clamp(145px,32vw,260px);
 }
 
@@ -333,7 +352,9 @@ body.fim-ciano #decoracaoFim { display: block; }
 
 @media (max-width:600px) {
   body { background-attachment: scroll; }
+
   #app { padding: 35px 16px; }
+
   h1 { margin-bottom: 30px; }
 
   .foto-fundo {
@@ -349,9 +370,12 @@ body.fim-ciano #decoracaoFim { display: block; }
   .foto-fundo:nth-child(4) { top: 39%; right: -12%; }
   .foto-fundo:nth-child(5) { bottom: 5%; left: 0; }
   .foto-fundo:nth-child(6) { bottom: 5%; right: 0; }
+
   .foto-fundo:nth-child(7) {
-    top: 70%; left: 35%;
-    width: 35vw; height: 130px;
+    top: 70%;
+    left: 35%;
+    width: 35vw;
+    height: 130px;
   }
 
   #mensagem {
@@ -486,6 +510,7 @@ function botao(texto, acao) {
 
 function imagensSnoopy(nomes) {
   snoopy.innerHTML = "";
+
   nomes.forEach(nome => {
     const img = document.createElement("img");
     img.src = nome;
@@ -616,7 +641,7 @@ function etapaPet(tipo) {
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* Nova tela cinza e ciano */
+/* Parte cinza e ciano */
 function etapaNaoAcabou() {
   pararTodasMusicas();
   limpar();
@@ -633,8 +658,6 @@ function etapaNaoAcabou() {
     registrar("NÃO, Acabou.", "Esse é o fim");
     etapaEsseEFim();
   });
-
-  botao("Voltar ❤️", iniciar);
 }
 
 function etapaRealmenteAcabou() {
@@ -649,8 +672,6 @@ function etapaRealmenteAcabou() {
 
   digitar(texto, 38);
   tocar(musicaIdiota);
-
-  botao("Voltar ❤️", etapaNaoAcabou);
 }
 
 /* Legenda sincronizada com o áudio */
@@ -664,11 +685,6 @@ function etapaEsseEFim() {
 
   tocar(musicaFim);
 
-  /*
-    Tempos aproximados em segundos.
-    Ajuste os valores depois de testar no site,
-    caso a sua gravação tenha pausas diferentes.
-  */
   const versos = [
     {t: 0, texto: "Mas dessa vez eu já decidi"},
     {t: 4, texto: "Quero ver teus olhos ao dizer..."},
@@ -698,8 +714,6 @@ function etapaEsseEFim() {
       }
     }
   };
-
-  botao("Voltar ❤️", etapaNaoAcabou);
 }
 
 function etapaTalvez() {
