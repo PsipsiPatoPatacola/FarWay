@@ -20,7 +20,6 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   overflow-x: hidden;
-  transition: background .7s;
 }
 
 body::before {
@@ -124,10 +123,7 @@ button:hover {
   margin-bottom: 15px;
 }
 
-#enviarTexto, #status {
-  position: relative;
-  z-index: 5;
-}
+#enviarTexto, #status { position: relative; z-index: 5; }
 
 #status {
   font-size: 15px;
@@ -199,21 +195,18 @@ button:hover {
 
 /* Temas */
 body.anakin { background: #171717; }
-body.anakin::before { background: rgba(0,0,0,.30); }
-
 body.melissa { background: #27083d; }
-body.melissa::before { background: rgba(35,0,55,.28); }
-
 body.cigana { background: #542000; }
-body.cigana::before { background: rgba(65,25,0,.30); }
-
 body.nos { background: #171313; }
-body.nos::before { background: rgba(30,12,0,.30); }
-
 body.vermelho { background: #650b24; }
+
+body.anakin::before { background: rgba(0,0,0,.30); }
+body.melissa::before { background: rgba(35,0,55,.28); }
+body.cigana::before { background: rgba(65,25,0,.30); }
+body.nos::before { background: rgba(30,12,0,.30); }
 body.vermelho::before { background: rgba(70,0,20,.66); }
 
-/* Parte cinza e ciano */
+/* Tema cinza e ciano */
 body.fim-ciano {
   background: #18252a;
   color: #e8fbff;
@@ -258,7 +251,7 @@ body.fim-ciano button:hover {
   box-shadow: 0 0 25px #83e5ee;
 }
 
-/* Luvinha animada estilo videogame */
+/* Luvinhas de videogame */
 .luvinha {
   display: inline-block;
   font-size: 31px;
@@ -274,18 +267,10 @@ body.fim-ciano button:hover {
 }
 
 @keyframes luvaAnimada {
-  0%, 100% {
-    transform: translateY(0) rotate(-13deg) scale(1);
-  }
-  25% {
-    transform: translateY(-10px) rotate(12deg) scale(1.12);
-  }
-  50% {
-    transform: translateY(-3px) rotate(-8deg) scale(1.05);
-  }
-  75% {
-    transform: translateY(-12px) rotate(14deg) scale(1.12);
-  }
+  0%,100% { transform: translateY(0) rotate(-13deg) scale(1); }
+  25% { transform: translateY(-10px) rotate(12deg) scale(1.12); }
+  50% { transform: translateY(-3px) rotate(-8deg) scale(1.05); }
+  75% { transform: translateY(-12px) rotate(14deg) scale(1.12); }
 }
 
 body.fim-ciano #opcoes button {
@@ -297,7 +282,7 @@ body.fim-ciano #opcoes button:nth-child(2) {
 }
 
 @keyframes botaoJogo {
-  0%, 45%, 100% {
+  0%,45%,100% {
     box-shadow: 0 0 12px rgba(111,225,237,.45);
     border-color: #83e5ee;
   }
@@ -336,47 +321,83 @@ body.fim-ciano #decoracaoFim { display: block; }
 .snoopy-decor:nth-child(5) { bottom: 1%; left: -4%; width: clamp(135px,30vw,245px); }
 .snoopy-decor:nth-child(6) { bottom: 0; right: -5%; width: clamp(145px,32vw,260px); }
 
-/* Letras com neon, brilho e movimento */
+/* LETRA: neon intenso e animação */
 #legenda {
   position: relative;
   z-index: 4;
-  min-height: 100px;
+  min-height: 125px;
   width: min(95%,800px);
   margin: 20px auto;
-  color: #e9fcff;
-  font-family: Georgia, serif;
-  font-size: clamp(23px,5vw,34px);
-  line-height: 1.7;
+  padding: 12px 5px;
+  color: #eaffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px,5.5vw,37px);
+  font-weight: bold;
+  line-height: 1.65;
+  text-align: center;
+  -webkit-text-stroke: .5px #c9ffff;
   text-shadow:
-    0 0 5px #fff,
-    0 0 12px #65f4ff,
-    0 0 25px #24dfff,
-    0 0 42px #24dfff;
-  animation: neonTexto 1.8s ease-in-out infinite,
-             movimentoTexto 3s ease-in-out infinite;
+    0 0 3px #ffffff,
+    0 0 7px #ffffff,
+    0 0 14px #8dfaff,
+    0 0 24px #00eaff,
+    0 0 38px #00d9ff,
+    0 0 55px #00bfff,
+    0 0 75px #008cff;
+  filter: drop-shadow(0 0 12px #00dfff);
 }
 
-@keyframes neonTexto {
-  0%, 100% {
+/* Classe reiniciada pelo JavaScript em cada frase */
+#legenda.animar {
+  animation:
+    entradaLetra 1.1s cubic-bezier(.2,.8,.2,1) both,
+    neonForte 1.7s ease-in-out infinite 1.1s,
+    flutuarLetra 3s ease-in-out infinite 1.1s;
+}
+
+@keyframes entradaLetra {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(.72) rotateX(35deg);
+    filter: blur(12px) drop-shadow(0 0 0 #00eaff);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-7px) scale(1.08) rotateX(0);
+    filter: blur(0) drop-shadow(0 0 28px #00faff);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0) drop-shadow(0 0 12px #00dfff);
+  }
+}
+
+@keyframes neonForte {
+  0%,100% {
     opacity: 1;
     text-shadow:
-      0 0 5px #fff,
-      0 0 12px #65f4ff,
-      0 0 25px #24dfff,
-      0 0 42px #24dfff;
+      0 0 3px #fff,
+      0 0 8px #fff,
+      0 0 16px #8dfaff,
+      0 0 30px #00eaff,
+      0 0 48px #00d9ff,
+      0 0 70px #008cff;
   }
   50% {
-    opacity: .78;
+    opacity: .88;
     text-shadow:
-      0 0 3px #fff,
-      0 0 7px #65f4ff,
-      0 0 15px #24dfff,
-      0 0 25px #24dfff;
+      0 0 5px #fff,
+      0 0 13px #fff,
+      0 0 25px #8dfaff,
+      0 0 42px #00eaff,
+      0 0 65px #00d9ff,
+      0 0 95px #008cff;
   }
 }
 
-@keyframes movimentoTexto {
-  0%, 100% { transform: translateY(0) scale(1); }
+@keyframes flutuarLetra {
+  0%,100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-8px) scale(1.025); }
 }
 
@@ -424,8 +445,9 @@ body.fim-ciano #decoracaoFim { display: block; }
   .snoopy-decor:nth-child(6) { bottom: 1%; right: -10%; }
 
   #legenda {
-    font-size: clamp(22px,5.5vw,30px);
-    padding: 0 5px;
+    font-size: clamp(23px,5.8vw,32px);
+    min-height: 120px;
+    padding: 10px 5px;
   }
 }
 </style>
@@ -520,6 +542,7 @@ function limpar() {
   snoopy.innerHTML = "";
   mensagem.textContent = "";
   legenda.textContent = "";
+  legenda.classList.remove("animar");
   campo.value = "";
   campo.style.display = "none";
   enviarTexto.style.display = "none";
@@ -571,9 +594,7 @@ function digitar(texto, velocidade = 35) {
     mensagem.textContent += texto.charAt(i);
     i++;
 
-    if (i >= texto.length) {
-      clearInterval(digitacaoAtual);
-    }
+    if (i >= texto.length) clearInterval(digitacaoAtual);
   }, velocidade);
 }
 
@@ -681,18 +702,14 @@ function etapaPet(tipo) {
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* Luvinha animada */
 function criarLuvinha() {
   return '<span class="luvinha" aria-hidden="true">🧤</span>';
 }
 
-/* Escolha do fim */
 function etapaNaoAcabou() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
-
-  /* Esconde o título */
   pergunta.style.display = "none";
 
   const botaoUm = document.createElement("button");
@@ -712,13 +729,10 @@ function etapaNaoAcabou() {
   opcoes.appendChild(botaoDois);
 }
 
-/* Texto sem o título "Realmente acabou?" */
 function etapaRealmenteAcabou() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
-
-  /* Não mostra título nesta tela */
   pergunta.style.display = "none";
 
   const texto =
@@ -728,16 +742,22 @@ function etapaRealmenteAcabou() {
   tocar(musicaIdiota);
 }
 
-/* Música e frases sincronizadas */
+/* Troca a frase e reinicia a animação inteira */
+function mostrarVerso(texto) {
+  legenda.classList.remove("animar");
+
+  /* Força o navegador a reiniciar os efeitos */
+  void legenda.offsetWidth;
+
+  legenda.textContent = texto;
+  legenda.classList.add("animar");
+}
+
 function etapaEsseEFim() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
-
-  /* Sem título nesta tela */
   pergunta.style.display = "none";
-
-  legenda.textContent = "";
 
   const versos = [
     {t: 0, texto: "Mas dessa vez eu já decidi"},
@@ -755,6 +775,10 @@ function etapaEsseEFim() {
 
   let versoAtual = -1;
 
+  /* Mostra a primeira frase imediatamente */
+  mostrarVerso(versos[0].texto);
+  versoAtual = 0;
+
   musicaFim.ontimeupdate = () => {
     const tempo = musicaFim.currentTime;
 
@@ -762,7 +786,7 @@ function etapaEsseEFim() {
       if (tempo >= versos[i].t) {
         if (versoAtual !== i) {
           versoAtual = i;
-          legenda.textContent = versos[i].texto;
+          mostrarVerso(versos[i].texto);
         }
         break;
       }
