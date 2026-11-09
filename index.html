@@ -20,7 +20,7 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   overflow-x: hidden;
-  transition: background .7s, color .7s;
+  transition: background .7s;
 }
 
 body::before {
@@ -213,26 +213,6 @@ body.nos::before { background: rgba(30,12,0,.30); }
 body.vermelho { background: #650b24; }
 body.vermelho::before { background: rgba(70,0,20,.66); }
 
-body.anakin h1 {
-  border-color: #777;
-  box-shadow: 0 0 18px rgba(255,255,255,.2);
-  background: rgba(0,0,0,.65);
-}
-
-body.melissa h1 { border-color: #d52cff; }
-
-body.cigana h1 {
-  border-color: #ff9a32;
-  box-shadow: 0 0 18px #ff7b00;
-  background: rgba(65,25,0,.75);
-}
-
-body.nos h1 {
-  border-color: #ff8a28;
-  box-shadow: 0 0 18px #ff7b00;
-  background: rgba(0,0,0,.72);
-}
-
 /* Parte cinza e ciano */
 body.fim-ciano {
   background: #18252a;
@@ -278,53 +258,36 @@ body.fim-ciano button:hover {
   box-shadow: 0 0 25px #83e5ee;
 }
 
-/* Mão pixelada estilo videogame */
-.mao-game {
+/* Luvinha animada estilo videogame */
+.luvinha {
   display: inline-block;
-  width: 32px;
-  height: 38px;
+  font-size: 31px;
   vertical-align: middle;
-  margin-right: 10px;
-  image-rendering: pixelated;
-  shape-rendering: crispEdges;
-  filter: drop-shadow(0 0 5px #ffe66d);
-  animation: maoGame 1s steps(4, end) infinite;
+  margin-right: 12px;
+  filter: drop-shadow(0 0 5px #b8faff);
+  transform-origin: bottom center;
+  animation: luvaAnimada 1.15s ease-in-out infinite;
 }
 
-.mao-game svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+#opcoes button:nth-child(2) .luvinha {
+  animation-delay: .55s;
 }
 
-.mao-game path {
-  fill: #ffd84a;
-  stroke: #5b3900;
-  stroke-width: 1.5;
-  stroke-linejoin: miter;
-  shape-rendering: crispEdges;
-}
-
-#opcoes button:nth-child(2) .mao-game {
-  animation-delay: .5s;
-}
-
-@keyframes maoGame {
+@keyframes luvaAnimada {
   0%, 100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0) rotate(-13deg) scale(1);
   }
   25% {
-    transform: translateY(-9px) scale(1.12);
+    transform: translateY(-10px) rotate(12deg) scale(1.12);
   }
   50% {
-    transform: translateY(0) scale(1);
+    transform: translateY(-3px) rotate(-8deg) scale(1.05);
   }
   75% {
-    transform: translateY(-4px) scale(1.08);
+    transform: translateY(-12px) rotate(14deg) scale(1.12);
   }
 }
 
-/* Brilho alternado dos botões */
 body.fim-ciano #opcoes button {
   animation: botaoJogo 2s ease-in-out infinite;
 }
@@ -344,7 +307,7 @@ body.fim-ciano #opcoes button:nth-child(2) {
   }
 }
 
-/* Snoopys decorativos */
+/* Decoração Snoopy */
 #decoracaoFim {
   display: none;
   position: fixed;
@@ -373,6 +336,7 @@ body.fim-ciano #decoracaoFim { display: block; }
 .snoopy-decor:nth-child(5) { bottom: 1%; left: -4%; width: clamp(135px,30vw,245px); }
 .snoopy-decor:nth-child(6) { bottom: 0; right: -5%; width: clamp(145px,32vw,260px); }
 
+/* Letras com neon, brilho e movimento */
 #legenda {
   position: relative;
   z-index: 4;
@@ -383,12 +347,44 @@ body.fim-ciano #decoracaoFim { display: block; }
   font-family: Georgia, serif;
   font-size: clamp(23px,5vw,34px);
   line-height: 1.7;
-  text-shadow: 0 0 12px #4bd9e9, 0 2px 5px #000;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 12px #65f4ff,
+    0 0 25px #24dfff,
+    0 0 42px #24dfff;
+  animation: neonTexto 1.8s ease-in-out infinite,
+             movimentoTexto 3s ease-in-out infinite;
+}
+
+@keyframes neonTexto {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 12px #65f4ff,
+      0 0 25px #24dfff,
+      0 0 42px #24dfff;
+  }
+  50% {
+    opacity: .78;
+    text-shadow:
+      0 0 3px #fff,
+      0 0 7px #65f4ff,
+      0 0 15px #24dfff,
+      0 0 25px #24dfff;
+  }
+}
+
+@keyframes movimentoTexto {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.025); }
 }
 
 @media (max-width:600px) {
   body { background-attachment: scroll; }
+
   #app { padding: 35px 16px; }
+
   h1 { margin-bottom: 30px; }
 
   .foto-fundo {
@@ -426,6 +422,11 @@ body.fim-ciano #decoracaoFim { display: block; }
   .snoopy-decor:nth-child(4) { top: 44%; right: -13%; }
   .snoopy-decor:nth-child(5) { bottom: 1%; left: -10%; }
   .snoopy-decor:nth-child(6) { bottom: 1%; right: -10%; }
+
+  #legenda {
+    font-size: clamp(22px,5.5vw,30px);
+    padding: 0 5px;
+  }
 }
 </style>
 </head>
@@ -498,28 +499,16 @@ function pararTodasMusicas() {
     a.pause();
     a.currentTime = 0;
   });
+
+  musicaFim.ontimeupdate = null;
 }
 
 function tocar(audio) {
   pararTodasMusicas();
+
   audio.play().catch(() => {
     status.textContent = "Toque na tela para iniciar a música.";
   });
-}
-
-function registrar(perguntaFeita, resposta) {
-  if (ENDPOINT.includes("COLE_AQUI")) return;
-
-  fetch(ENDPOINT, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {"Content-Type":"text/plain;charset=utf-8"},
-    body: JSON.stringify({
-      pergunta: perguntaFeita,
-      resposta: resposta,
-      data: new Date().toLocaleString("pt-BR")
-    })
-  }).catch(() => {});
 }
 
 let digitacaoAtual = null;
@@ -586,6 +575,21 @@ function digitar(texto, velocidade = 35) {
       clearInterval(digitacaoAtual);
     }
   }, velocidade);
+}
+
+function registrar(perguntaFeita, resposta) {
+  if (ENDPOINT.includes("COLE_AQUI")) return;
+
+  fetch(ENDPOINT, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
+    body: JSON.stringify({
+      pergunta: perguntaFeita,
+      resposta: resposta,
+      data: new Date().toLocaleString("pt-BR")
+    })
+  }).catch(() => {});
 }
 
 function iniciar() {
@@ -677,30 +681,22 @@ function etapaPet(tipo) {
   botao("Voltar à escolha dos filhos ❤️", etapaFilhos);
 }
 
-/* Tela de escolha com mãos de videogame */
-function criarMaoGame() {
-  return `
-    <span class="mao-game" aria-hidden="true">
-      <svg viewBox="0 0 16 20">
-        <path d="
-          M6 1 H8 V7 H10 V5 H12 V7 H14 V10
-          H15 V15 H13 V17 H11 V19 H5 V17 H3
-          V15 H1 V11 H3 V13 H5 V8 H6 Z
-        "/>
-      </svg>
-    </span>
-  `;
+/* Luvinha animada */
+function criarLuvinha() {
+  return '<span class="luvinha" aria-hidden="true">🧤</span>';
 }
 
+/* Escolha do fim */
 function etapaNaoAcabou() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
 
+  /* Esconde o título */
   pergunta.style.display = "none";
 
   const botaoUm = document.createElement("button");
-  botaoUm.innerHTML = criarMaoGame() + "Realmente acabou?";
+  botaoUm.innerHTML = criarLuvinha() + "Realmente acabou?";
   botaoUm.onclick = () => {
     registrar("NÃO, Acabou.", "Realmente acabou?");
     etapaRealmenteAcabou();
@@ -708,7 +704,7 @@ function etapaNaoAcabou() {
   opcoes.appendChild(botaoUm);
 
   const botaoDois = document.createElement("button");
-  botaoDois.innerHTML = criarMaoGame() + "Esse é o fim";
+  botaoDois.innerHTML = criarLuvinha() + "Esse é o fim";
   botaoDois.onclick = () => {
     registrar("NÃO, Acabou.", "Esse é o fim");
     etapaEsseEFim();
@@ -716,12 +712,14 @@ function etapaNaoAcabou() {
   opcoes.appendChild(botaoDois);
 }
 
+/* Texto sem o título "Realmente acabou?" */
 function etapaRealmenteAcabou() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
 
-  pergunta.textContent = "Realmente acabou?";
+  /* Não mostra título nesta tela */
+  pergunta.style.display = "none";
 
   const texto =
     "Eu sei muito bem o meu erro, eu nunca quis controlar suas finanças, nem ver os seus gastos, nem duvidar de vc. A questão é que meu lado tóxico é entregar tudo meu para você, te proporcionar o melhor material possível, só que isso é apenas e unicamente para você. Se for babaca, podre, ruim de minha parte isso não importa, não tinha nada que mais me irritava do que você ter que gastar com os outros algo que você suou para ter enquanto, e ao eu oferecer isso, queria um egocentrismo de você para você, como também queria que ser unicamente para você fosse valorizado.";
@@ -730,17 +728,16 @@ function etapaRealmenteAcabou() {
   tocar(musicaIdiota);
 }
 
+/* Música e frases sincronizadas */
 function etapaEsseEFim() {
   pararTodasMusicas();
   limpar();
   document.body.className = "fim-ciano";
 
-  /* Não exibe título nessa tela */
+  /* Sem título nesta tela */
   pergunta.style.display = "none";
 
   legenda.textContent = "";
-
-  tocar(musicaFim);
 
   const versos = [
     {t: 0, texto: "Mas dessa vez eu já decidi"},
@@ -771,6 +768,8 @@ function etapaEsseEFim() {
       }
     }
   };
+
+  tocar(musicaFim);
 }
 
 function etapaTalvez() {
